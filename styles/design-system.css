@@ -265,6 +265,7 @@ ul, ol { list-style: none; }
   align-items: center;
   justify-content: center;
   font-size: 13px;
+  color: var(--bg-deep);
   animation: logo-breathe 4s ease-in-out infinite;
   position: relative;
 }
