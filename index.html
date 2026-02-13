@@ -25,63 +25,95 @@
     text-align: center;
   }
 
-  .hero-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--accent-cyan);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .forge-dot {
-    width: 7px;
-    height: 7px;
-    background: var(--accent-cyan);
-    border-radius: 50%;
-    animation: blink 2.5s ease-in-out infinite;
-    box-shadow: 0 0 10px var(--accent-cyan);
-  }
-
-  .hero h1 {
+  .hero-prompt {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(3rem, 6vw, 5.2rem);
-    line-height: 1.08;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1.15;
     letter-spacing: -0.035em;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
+    min-height: 2.4em;
   }
 
-  .hero h1 .glow-text {
+  .hero-prompt .prefix {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .hero-prompt .typed-text {
     background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .hero h1 .dim { color: var(--text-muted); font-weight: 600; }
-
-  .hero-sub {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 48px;
-    max-width: 600px;
+  .hero-prompt .cursor-blink {
+    width: 3px;
+    height: 0.9em;
+    margin-left: 4px;
   }
-
-  .hero-sub strong { color: var(--text-primary); }
 
   .hero-cta {
+    margin-bottom: 48px;
+  }
+
+  .hero-crowd {
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+    min-height: 60px;
+  }
+
+  .hero-avatars {
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 64px;
   }
+
+  .hero-avatars .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: -10px;
+    border: 2px solid var(--bg-deep);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-spring);
+    font-size: 0.7rem;
+  }
+
+  .hero-avatars .avatar:first-child { margin-left: 0; }
+  .hero-avatars .avatar.visible { opacity: 1; transform: scale(1); }
+
+  .hero-avatars .avatar--bot {
+    position: relative;
+  }
+
+  .hero-avatars .avatar--bot .ai-label {
+    position: absolute;
+    bottom: -6px;
+    right: -4px;
+    font-family: var(--font-mono);
+    font-size: 0.45rem;
+    font-weight: 700;
+    background: var(--accent-violet);
+    color: var(--bg-deep);
+    padding: 1px 4px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-crowd-text {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-out);
+  }
+
+  .hero-crowd-text.visible { opacity: 1; }
 
   .hero-presence {
     font-family: var(--font-mono);
@@ -92,295 +124,267 @@
     gap: 8px;
   }
 
-  .hero-presence .forge-dot {
-    width: 5px;
-    height: 5px;
+  .forge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    animation: blink 2.5s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--accent-cyan);
   }
 
-  /* ═══════════════ YES-AND CHAIN ═══════════════ */
-  .chain-section {
+  /* ═══════════════ LIVING FORGE ═══════════════ */
+  .forge-section {
     position: relative;
     z-index: 2;
-    padding: 80px 40px 120px;
-    max-width: 900px;
+    padding: 0 40px 80px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
-  .chain-container {
-    position: relative;
-  }
-
-  .chain-thread {
-    position: absolute;
-    left: 23px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg,
-      var(--accent-cyan),
-      var(--accent-green),
-      var(--accent-violet),
-      var(--accent-amber));
-    opacity: 0.2;
-  }
-
-  .chain-riff {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding: 20px 0;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: chain-in 0.6s var(--ease-out) forwards;
-  }
-
-  .chain-riff:nth-child(2) { animation-delay: 0.3s; }
-  .chain-riff:nth-child(3) { animation-delay: 0.7s; }
-  .chain-riff:nth-child(4) { animation-delay: 1.1s; }
-  .chain-riff:nth-child(5) { animation-delay: 1.5s; }
-  .chain-riff:nth-child(6) { animation-delay: 1.9s; }
-
-  @keyframes chain-in {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .chain-avatar {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  .chain-body {
-    flex: 1;
-    padding: 20px 24px;
+  .forge-container {
     background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    transition: all 0.3s var(--ease-out);
+    border: 1px solid var(--border-active);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0, 255, 213, 0.05);
+    transition: opacity 0.5s;
   }
 
-  .chain-body:hover {
-    border-color: rgba(255, 255, 255, 0.08);
-    transform: translateX(4px);
+  .forge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
-  .chain-meta {
+  .forge-header-left {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    gap: 12px;
   }
 
-  .chain-name { font-weight: 600; }
-  .chain-type {
-    font-size: 0.62rem;
+  .forge-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .forge-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .forge-project-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+
+  .forge-project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
     padding: 2px 8px;
     border-radius: var(--radius-full);
     letter-spacing: 0.05em;
   }
 
-  .chain-text {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
+  .forge-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 360px;
   }
 
-  .chain-text em {
-    color: var(--text-primary);
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  .chain-text code {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    background: var(--bg-elevated);
-    padding: 2px 6px;
-    border-radius: 3px;
-    color: var(--accent-cyan);
-  }
-
-  .chain-outcome {
-    margin-top: 16px;
+  .forge-timeline {
     padding: 20px 24px;
-    background: var(--bg-elevated);
-    border: 1px solid rgba(255, 215, 0, 0.15);
-    border-radius: var(--radius-lg);
-    text-align: center;
-    opacity: 0;
-    animation: chain-in 0.8s var(--ease-out) 2.4s forwards;
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
   }
 
-  .chain-outcome-label {
+  .forge-timeline-label {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent-gold);
+    font-size: 0.6rem;
+    color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
-  .chain-outcome-text {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--text-primary);
+  .forge-entry {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
   }
 
-  .chain-outcome-sub {
+  .forge-entry.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .forge-entry-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 4px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    flex-shrink: 0;
   }
 
-  /* ═══════════════ SECTIONS ═══════════════ */
-  .page-section {
+  .forge-entry-avatar--bot {
+    border: 1.5px dashed rgba(167, 139, 250, 0.4);
+    background: rgba(167, 139, 250, 0.1);
+    color: var(--accent-violet);
+  }
+
+  .forge-entry-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .forge-entry-name {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .forge-entry-text {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .forge-preview {
+    padding: 20px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .forge-preview-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .forge-preview-code {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .code-line { color: var(--text-secondary); }
+  .code-line-num {
+    color: var(--text-muted);
+    user-select: none;
+    display: inline-block;
+    width: 24px;
+    text-align: right;
+    margin-right: 14px;
+  }
+
+  .code-highlight {
+    background: rgba(0, 255, 213, 0.03);
+    border-left: 2px solid var(--accent-cyan);
+    margin: 0 -24px;
+    padding: 0 22px;
+  }
+
+  .forge-footer {
+    padding: 14px 24px;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .forge-milestones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .milestone {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+  }
+
+  .milestone-value {
+    color: var(--accent-cyan);
+    font-weight: 600;
+  }
+
+  .forge-deploy {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .deploy-url {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .deploy-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent-green);
+  }
+
+  .deploy-indicator .forge-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+  }
+
+  /* ═══════════════ CINEMA CAROUSEL ═══════════════ */
+  .cinema-section {
     position: relative;
     z-index: 2;
     padding: 80px 40px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
-  .section-title .accent {
-    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .section-title em {
-    font-style: italic;
-    color: var(--accent-cyan);
-  }
-
-  /* ═══════════════ THE PROMISE ═══════════════ */
-  .promise {
-    text-align: center;
-    padding: 60px 40px;
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .promise-text {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    letter-spacing: -0.02em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .promise-text .bright {
-    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .promise-badge {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-green);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .promise-badge::before,
-  .promise-badge::after {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-green));
-  }
-
-  .promise-badge::after {
-    background: linear-gradient(90deg, var(--accent-green), transparent);
-  }
-
-  .promise-sub {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    max-width: 560px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-
-  .promise-detail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
-    margin-top: 40px;
-    padding: 24px 32px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    max-width: 560px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .promise-detail-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .promise-detail-label {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .promise-detail-value {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.3rem;
-  }
-
-  .promise-detail-divider {
-    width: 1px;
-    height: 40px;
-    background: var(--border-subtle);
-  }
-
-  /* ═══════════════ RIFF SHOWCASE ═══════════════ */
-  .riff-showcase {
+  .cinema-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-top: 48px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
 
-  .riff-showcase .riff-card:last-child {
-    grid-column: 2 / 3;
-  }
-
-  .riff-card {
+  .cinema-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
@@ -388,9 +392,10 @@
     transition: all 0.4s var(--ease-out);
     position: relative;
     overflow: hidden;
+    cursor: default;
   }
 
-  .riff-card::before {
+  .cinema-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -401,80 +406,103 @@
     transition: opacity 0.4s;
   }
 
-  .riff-card:hover::before { opacity: 1; }
-  .riff-card:hover {
-    transform: translateY(-4px);
+  .cinema-card:hover::before { opacity: 1; }
+  .cinema-card:hover {
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   }
 
-  .riff-card:nth-child(1)::before { background: var(--accent-violet); }
-  .riff-card:nth-child(2)::before { background: var(--accent-cyan); }
-  .riff-card:nth-child(3)::before { background: var(--accent-coral); }
-  .riff-card:nth-child(4)::before { background: var(--accent-green); }
-  .riff-card:nth-child(5)::before { background: var(--accent-amber); }
+  .cinema-card:nth-child(1)::before { background: var(--accent-cyan); }
+  .cinema-card:nth-child(2)::before { background: var(--accent-violet); }
+  .cinema-card:nth-child(3)::before { background: var(--accent-green); }
+  .cinema-card:nth-child(4)::before { background: var(--accent-coral); }
 
-  .riff-card-header {
+  .cinema-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
-  .riff-card-type {
+  .cinema-card-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .cinema-card-tag {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 3px 10px;
+    padding: 3px 8px;
     border-radius: var(--radius-full);
   }
 
-  .riff-card-author {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-muted);
-  }
-
-  .riff-card-content {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: var(--text-secondary);
-    min-height: 60px;
-  }
-
-  .riff-card-content strong { color: var(--text-primary); }
-
-  .riff-card-content code {
-    font-family: var(--font-mono);
+  .cinema-card-desc {
     font-size: 0.82rem;
-    background: var(--bg-elevated);
-    padding: 2px 6px;
-    border-radius: 3px;
-    color: var(--accent-cyan);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    min-height: 52px;
   }
 
-  .riff-card-footer {
+  .cinema-card-stats {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 16px;
-    padding-top: 12px;
+    gap: 14px;
+    padding-top: 14px;
     border-top: 1px solid var(--border-subtle);
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     color: var(--text-muted);
+    flex-wrap: wrap;
   }
 
-  .riff-card-karma { color: var(--accent-gold); font-weight: 600; }
+  .cinema-card-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cinema-card-stat-value { color: var(--accent-cyan); font-weight: 600; }
+
+  .cinema-card-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+
+  .cinema-card-status .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
 
   /* ═══════════════ KARMA PRINCIPLES ═══════════════ */
-  .karma-principles { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+  .karma-section {
+    position: relative;
+    z-index: 2;
+    padding: 80px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .karma-principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
 
   .karma-principle {
     padding: 24px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
+    background: rgba(17, 17, 20, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 12px;
     transition: all 0.3s var(--ease-out);
     border-left: 3px solid transparent;
@@ -483,9 +511,10 @@
   .karma-principle:hover {
     border-left-color: var(--accent-cyan);
     transform: translateX(4px);
+    background: rgba(17, 17, 20, 0.8);
   }
 
-  .karma-principle h4 {
+  .karma-principle h3 {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1rem;
@@ -498,53 +527,84 @@
     line-height: 1.65;
   }
 
-  /* ═══════════════ CALLOUT ═══════════════ */
-  .callout {
-    text-align: center;
-    padding: 60px 40px;
+  /* ═══════════════ WAITLIST + PROMISE ═══════════════ */
+  .signup-section {
     position: relative;
     z-index: 2;
+    padding: 80px 40px 120px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  .callout-text {
+  .signup-promise {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
     letter-spacing: -0.02em;
-    max-width: 800px;
-    margin: 0 auto;
     line-height: 1.4;
+    margin-bottom: 8px;
   }
 
-  .callout-text .dim { color: var(--text-muted); }
-  .callout-text .bright {
+  .signup-promise .bright {
     background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* ═══════════════ WAITLIST ═══════════════ */
-  .waitlist {
-    text-align: center;
-    padding: 80px 40px 120px;
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: 0 auto;
+  .signup-hook {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    letter-spacing: -0.01em;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
   }
 
-  .waitlist-form {
-    display: flex;
-    gap: 12px;
-    max-width: 500px;
-    margin: 0 auto;
+  .signup-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    text-align: left;
   }
 
-  .waitlist-input {
-    flex: 1;
-    padding: 16px 20px;
+  .signup-card {
     background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .signup-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .signup-card-label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .signup-card-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .signup-card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .signup-input {
+    padding: 14px 16px;
+    background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     border-radius: 8px;
     color: var(--text-primary);
@@ -554,200 +614,40 @@
     transition: all 0.3s var(--ease-out);
   }
 
-  .waitlist-input::placeholder { color: var(--text-muted); }
-  .waitlist-input:focus {
+  .signup-input::placeholder { color: var(--text-muted); }
+  .signup-input:focus {
     border-color: var(--accent-cyan);
     box-shadow: 0 0 24px rgba(0, 255, 213, 0.1);
   }
 
-  .waitlist-note {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-muted);
-    margin-top: 16px;
-    letter-spacing: 0.03em;
-  }
-
-  /* ═══════════════ FORGE STREAM CINEMA ═══════════════ */
-  .cinema-container {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-active);
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 0 60px rgba(0, 255, 213, 0.05);
-  }
-
-  .cinema-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 28px;
+  .signup-select {
+    padding: 14px 16px;
     background: var(--bg-elevated);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-
-  .cinema-project { display: flex; align-items: center; gap: 12px; }
-
-  .cinema-project-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-  }
-
-  .cinema-stats {
-    display: flex;
-    gap: 24px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-  }
-
-  .cinema-stat-value { color: var(--accent-cyan); font-weight: 600; }
-
-  .cinema-body {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    min-height: 340px;
-  }
-
-  .cinema-code {
-    padding: 24px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    line-height: 2;
-    border-right: 1px solid var(--border-subtle);
-  }
-
-  .code-line { color: var(--text-secondary); }
-  .code-line-num {
-    color: var(--text-muted);
-    user-select: none;
-    display: inline-block;
-    width: 28px;
-    text-align: right;
-    margin-right: 16px;
-  }
-
-  .code-highlight {
-    background: rgba(0, 255, 213, 0.03);
-    border-left: 2px solid var(--accent-cyan);
-    margin: 0 -24px;
-    padding: 0 22px;
-  }
-
-  .cinema-sidebar {
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .sidebar-label {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--text-muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .sidebar-event {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px 12px;
-    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
     border-radius: 8px;
-    font-size: 0.72rem;
-    line-height: 1.5;
-    animation: sidebar-in 0.4s var(--ease-out);
-  }
-
-  @keyframes sidebar-in {
-    from { opacity: 0; transform: translateX(16px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .sidebar-event-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    margin-top: 5px;
-    flex-shrink: 0;
-  }
-
-  .cinema-milestones {
-    padding: 14px 28px;
-    background: var(--bg-elevated);
-    border-top: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    gap: 24px;
+    color: var(--text-primary);
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-  }
-
-  .milestone {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-muted);
-  }
-
-  .milestone-value {
-    color: var(--accent-cyan);
-    font-weight: 600;
-  }
-
-  .cinema-deploy {
-    padding: 14px 28px;
-    background: var(--bg-elevated);
-    border-top: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .deploy-btn {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 8px 20px;
-    border-radius: var(--radius-full);
-    border: none;
-    cursor: pointer;
+    font-size: 0.82rem;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234a4a50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
     transition: all 0.3s var(--ease-out);
   }
 
-  .deploy-btn--ready {
-    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
-    color: var(--bg-deep);
+  .signup-select:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 24px rgba(0, 255, 213, 0.1);
   }
 
-  .deploy-btn--live {
-    background: transparent;
-    border: 1px solid var(--accent-green);
-    color: var(--accent-green);
-  }
-
-  .deploy-btn--live::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--accent-green);
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 8px var(--accent-green);
-    animation: blink 2s ease-in-out infinite;
-  }
-
-  .deploy-url {
+  .signup-note {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     color: var(--text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.03em;
+    text-align: center;
   }
 
   /* ═══════════════ PULSE WIDGET ═══════════════ */
@@ -787,84 +687,6 @@
   .pulse-widget.minimized .pulse-body { display: none; }
   .pulse-widget.minimized { max-height: none; }
 
-  /* ═══════════════ HOW IT WORKS — STEPS ═══════════════ */
-  .acts {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0;
-    position: relative;
-    margin-top: 48px;
-  }
-
-  .acts::before {
-    content: '';
-    position: absolute;
-    top: 44px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-amber), var(--accent-coral), var(--accent-violet), var(--accent-cyan), var(--accent-gold));
-    opacity: 0.25;
-  }
-
-  .act {
-    text-align: center;
-    position: relative;
-    padding: 0 14px;
-  }
-
-  .act-number {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    background: var(--bg-elevated);
-    border: 2px solid var(--border-subtle);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 24px;
-    transition: all 0.4s;
-    position: relative;
-    z-index: 2;
-  }
-
-  .act-step {
-    font-family: var(--font-display);
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    margin-bottom: 2px;
-  }
-
-  .act-icon { font-size: 1.6rem; }
-
-  .act:nth-child(1) .act-number { border-color: rgba(245, 166, 35, 0.3); color: var(--accent-amber); }
-  .act:nth-child(2) .act-number { border-color: rgba(255, 107, 107, 0.3); color: var(--accent-coral); }
-  .act:nth-child(3) .act-number { border-color: rgba(167, 139, 250, 0.3); color: var(--accent-violet); }
-  .act:nth-child(4) .act-number { border-color: rgba(0, 255, 213, 0.3); color: var(--accent-cyan); }
-  .act:nth-child(5) .act-number { border-color: rgba(57, 255, 20, 0.3); color: var(--accent-green); }
-  .act:nth-child(6) .act-number { border-color: rgba(255, 215, 0, 0.3); color: var(--accent-gold); }
-
-  .act:hover .act-number {
-    transform: scale(1.08);
-    box-shadow: 0 0 30px rgba(245, 166, 35, 0.15);
-  }
-
-  .act-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
-  }
-
-  .act-desc {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.65;
-  }
-
   /* ═══════════════ FOOTER OVERRIDE ═══════════════ */
   .site-footer {
     position: relative;
@@ -875,33 +697,34 @@
 
   /* ═══════════════ RESPONSIVE ═══════════════ */
   @media (max-width: 1024px) {
-    .cinema-body { grid-template-columns: 1fr; }
-    .cinema-sidebar { display: none; }
-    .acts { grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .acts::before { display: none; }
-    .page-section { padding-left: 24px; padding-right: 24px; }
+    .forge-body { grid-template-columns: 1fr; }
+    .forge-timeline { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .cinema-grid { grid-template-columns: repeat(2, 1fr); }
+    .karma-principles { grid-template-columns: 1fr; }
+    .forge-section { padding-left: 24px; padding-right: 24px; }
+    .cinema-section { padding-left: 24px; padding-right: 24px; }
+    .karma-section { padding-left: 24px; padding-right: 24px; }
+    .signup-section { padding-left: 24px; padding-right: 24px; }
     .hero { padding-left: 24px; padding-right: 24px; }
-    .chain-section { padding-left: 24px; padding-right: 24px; }
-    .promise { padding-left: 24px; padding-right: 24px; }
-    .promise-detail { flex-direction: column; gap: 16px; }
-    .promise-detail-divider { width: 60px; height: 1px; }
   }
 
   @media (max-width: 640px) {
-    .cinema-wrap { padding: 0 16px 40px; }
-    .cinema-milestones { flex-wrap: wrap; gap: 10px; }
-    .cinema-code { font-size: 0.62rem; padding: 16px; }
+    .nav-links { display: flex !important; }
+    .forge-section { padding-left: 16px; padding-right: 16px; }
+    .cinema-grid { grid-template-columns: 1fr; }
+    .signup-cards { grid-template-columns: 1fr; }
     .hero { padding-left: 16px; padding-right: 16px; }
-    .page-section { padding-left: 16px; padding-right: 16px; }
-    .chain-section { padding-left: 16px; padding-right: 16px; }
-    .acts { grid-template-columns: 1fr 1fr; gap: 24px; }
-    .waitlist-form { flex-direction: column; }
-    .hero-cta { flex-direction: column; }
-    .promise { padding: 60px 16px; }
+    .cinema-section { padding-left: 16px; padding-right: 16px; }
+    .karma-section { padding-left: 16px; padding-right: 16px; }
+    .signup-section { padding-left: 16px; padding-right: 16px; }
+    .forge-milestones { flex-wrap: wrap; gap: 8px; }
+    .forge-footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
+
+<a href="#main-content" class="sr-only" style="position:absolute;top:0;left:0;z-index:200;">Skip to content</a>
 
 <!-- ATMOSPHERE -->
 <div class="atmosphere" aria-hidden="true">
@@ -919,199 +742,188 @@
     CrowdForge
   </a>
   <div class="nav-links">
-    <a href="pages/home.html" class="nav-link">Home</a>
-    <a href="pages/stream.html" class="nav-link" onclick="return requireLogin(event)">Discover</a>
-    <a href="pages/forge.html" class="nav-link" onclick="return requireLogin(event)">Forge</a>
-    <a href="pages/dashboard.html" class="nav-link" onclick="return requireLogin(event)">Dashboard</a>
-    <a href="pages/leaderboards.html" class="nav-link" onclick="return requireLogin(event)">Leaderboards</a>
-    <button class="btn btn--primary btn--sm" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the Waitlist</button>
+    <a href="#signup" class="btn btn--primary btn--sm">Join the Waitlist</a>
   </div>
 </nav>
 
+<main id="main-content">
+
+<h1 class="sr-only">CrowdForge</h1>
+
 <!-- HERO -->
-<div class="hero page-content">
-  <h1>
-    <span class="glow-text">What are you making?</span>
-  </h1>
+<section class="hero page-content">
+  <div class="hero-prompt" aria-live="polite">
+    <span class="prefix">What if we made </span><span class="typed-text" id="typed-text"></span><span class="cursor-blink" aria-hidden="true"></span>
+  </div>
   <div class="hero-cta">
-    <button class="btn btn--primary btn--lg" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the waitlist</button>
-    <button class="btn btn--secondary" onclick="document.querySelector('.cinema-wrap').scrollIntoView({behavior:'smooth'})">See what's happening &#8595;</button>
+    <a href="#signup" class="btn btn--primary btn--lg">Start building</a>
+  </div>
+  <div class="hero-crowd" id="hero-crowd">
+    <div class="hero-avatars" id="hero-avatars" aria-hidden="true"></div>
+    <div class="hero-crowd-text" id="hero-crowd-text"></div>
   </div>
   <div class="hero-presence">
     <span class="forge-dot" aria-hidden="true"></span>
     <span id="presence-count">247 builders creating together right now</span>
   </div>
-  <div class="hero-label" style="margin-top: 16px; margin-bottom: 0;">
-    <span class="forge-dot" aria-hidden="true"></span>
-    Live on the forge
-  </div>
-</div>
+</section>
 
-<!-- CINEMA -->
-<section class="cinema-wrap" style="position:relative;z-index:2;padding:0 40px 60px;max-width:1100px;margin:0 auto;">
-  <div class="cinema-container">
-    <div class="cinema-header">
-      <div class="cinema-project">
-        <span class="forge-dot" aria-hidden="true"></span>
-        <span class="cinema-project-name" id="cinema-name">NomadDesk</span>
-      </div>
-      <div class="cinema-stats" id="cinema-stats">
-        <span><span class="cinema-stat-value">5</span> contributors</span>
-        <span><span class="cinema-stat-value">2h 14m</span> build time</span>
-        <span><span class="cinema-stat-value">live</span></span>
-      </div>
-    </div>
-    <div class="cinema-body">
-      <div class="cinema-code" id="cinema-code">
-        <div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { createApp } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">'./core'</span></div>
-        <div class="code-line"><span class="code-line-num">2</span></div>
-        <div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin added live crowd levels</span></div>
-        <div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> crowdLevel = <span style="color:var(--accent-cyan)">await</span> getCrowdData(cafeId)</div>
-        <div class="code-line code-highlight"><span class="code-line-num">5</span>dashboard.render({ wifi, crowd: crowdLevel })</div>
-        <div class="code-line"><span class="code-line-num">6</span></div>
-        <div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @mira added seat reservations</span></div>
-        <div class="code-line"><span class="code-line-num">8</span><span style="color:var(--accent-violet)">const</span> booking = <span style="color:var(--accent-cyan)">await</span> reserveSeat({</div>
-        <div class="code-line"><span class="code-line-num">9</span>  cafe: cafeId, type: <span style="color:var(--accent-green)">'quiet'</span></div>
-        <div class="code-line"><span class="code-line-num">10</span>})</div>
-        <div class="code-line"><span class="code-line-num">11</span></div>
-        <div class="code-line"><span class="code-line-num">12</span><span style="color:var(--accent-violet)">export default</span> createApp({ crowdLevel, booking })</div>
-      </div>
-      <div class="cinema-sidebar" id="cinema-sidebar">
-        <div class="sidebar-label">Activity</div>
-        <div class="sidebar-event">
-          <div class="sidebar-event-dot" style="background:var(--accent-coral)"></div>
-          <span><span style="color:var(--accent-coral);font-weight:500">@mira</span> designed the booking flow</span>
+<!-- LIVING FORGE -->
+<section class="forge-section" aria-label="Live project demo">
+  <div class="forge-container" id="forge-container">
+    <div class="forge-header">
+      <div class="forge-header-left">
+        <div class="forge-dots" aria-hidden="true">
+          <span style="background:#ff5f57"></span>
+          <span style="background:#febc2e"></span>
+          <span style="background:#28c840"></span>
         </div>
-        <div class="sidebar-event">
-          <div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div>
-          <span><span style="color:var(--accent-cyan);font-weight:500">@jin</span> added live crowd data</span>
-        </div>
-        <div class="sidebar-event">
-          <div class="sidebar-event-dot" style="background:var(--accent-green)"></div>
-          <span><span style="color:var(--accent-green);font-weight:500">@alex</span> shipped to production</span>
-        </div>
-        <div class="sidebar-event">
-          <div class="sidebar-event-dot" style="background:var(--accent-amber)"></div>
-          <span><span style="color:var(--accent-amber);font-weight:500">@eve</span> posted to 3 communities</span>
-        </div>
-        <div class="sidebar-event">
-          <div class="sidebar-event-dot" style="background:var(--accent-violet)"></div>
-          <span><span style="color:var(--accent-violet);font-weight:500">@sara</span> started this 2h ago</span>
-        </div>
+        <span class="forge-project-name" id="forge-project-name">SplitCheck</span>
+        <span class="forge-project-tag tag tag--cyan" id="forge-project-tag">solo + ai</span>
       </div>
     </div>
-    <div class="cinema-milestones" id="cinema-milestones">
-      <div class="milestone"><span class="milestone-value">12</span> contributions merged</div>
-      <div class="milestone"><span class="milestone-value">3</span> deploys</div>
-      <div class="milestone"><span class="milestone-value">1.2k</span> users</div>
+    <div class="forge-body">
+      <div class="forge-timeline">
+        <div class="forge-timeline-label">Contributions</div>
+        <div id="forge-timeline-entries" aria-live="polite"></div>
+      </div>
+      <div class="forge-preview">
+        <div class="forge-preview-label">Preview</div>
+        <div class="forge-preview-code" id="forge-preview-code"></div>
+      </div>
     </div>
-    <div class="cinema-deploy" id="cinema-deploy">
-      <span class="deploy-url" id="deploy-url">nomaddesk.app</span>
-      <button class="deploy-btn deploy-btn--live" id="deploy-btn">Live</button>
+    <div class="forge-footer">
+      <div class="forge-milestones" id="forge-milestones"></div>
+      <div class="forge-deploy" id="forge-deploy"></div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="how-it-works" class="page-section reveal">
-  <div class="section-label">How It Works</div>
-  <div class="acts">
-    <div class="act">
-      <div class="act-number"><div class="act-step">1</div><div class="act-icon">&#x1F4AC;</div></div>
-      <div class="act-title">Pitch</div>
-      <div class="act-desc">Throw out an idea. A half-thought is enough.</div>
+<!-- CINEMA CAROUSEL -->
+<section class="cinema-section reveal" aria-label="Projects being built">
+  <h2 class="section-label">What's Being Built</h2>
+  <div class="cinema-grid">
+    <div class="cinema-card">
+      <div class="cinema-card-header">
+        <span class="cinema-card-name">SplitCheck</span>
+        <span class="cinema-card-tag tag tag--cyan">Utility</span>
+      </div>
+      <div class="cinema-card-desc">Scan a receipt, tap to assign items, split the bill. One person + AI, built and deployed in an afternoon.</div>
+      <div class="cinema-card-stats">
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">1</span> builder + AI</div>
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">4</span> iterations</div>
+        <div class="cinema-card-status">
+          <span class="status-dot" style="background:var(--accent-green); box-shadow:0 0 6px var(--accent-green)" aria-hidden="true"></span>
+          <span style="color:var(--accent-green); font-weight:600">deployed</span>
+        </div>
+      </div>
     </div>
-    <div class="act">
-      <div class="act-number"><div class="act-step">2</div><div class="act-icon">&#x1F91D;</div></div>
-      <div class="act-title">Rally</div>
-      <div class="act-desc">People show up to help. A team forms around your idea.</div>
+    <div class="cinema-card">
+      <div class="cinema-card-header">
+        <span class="cinema-card-name">NomadDesk</span>
+        <span class="cinema-card-tag tag tag--violet">Technical</span>
+      </div>
+      <div class="cinema-card-desc">Find cafes with great wifi, book a seat, check crowd levels — remote work, sorted.</div>
+      <div class="cinema-card-stats">
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">5</span> contributors</div>
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">1.2k</span> users</div>
+        <div class="cinema-card-status">
+          <span class="status-dot" style="background:var(--accent-green); box-shadow:0 0 6px var(--accent-green)" aria-hidden="true"></span>
+          <span style="color:var(--accent-green); font-weight:600">live</span>
+        </div>
+      </div>
     </div>
-    <div class="act">
-      <div class="act-number"><div class="act-step">3</div><div class="act-icon">&#x1F528;</div></div>
-      <div class="act-title">Build</div>
-      <div class="act-desc">With AI, with friends, with experts you just met. Build it together. Deploy it for real.</div>
+    <div class="cinema-card">
+      <div class="cinema-card-header">
+        <span class="cinema-card-name">ClimatePulse</span>
+        <span class="cinema-card-tag tag tag--green">Civic</span>
+      </div>
+      <div class="cinema-card-desc">Neighborhood emissions dashboard — open data, heatmaps, city comparisons.</div>
+      <div class="cinema-card-stats">
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">7</span> contributors</div>
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">5</span> datasets</div>
+        <div class="cinema-card-status">
+          <span class="status-dot" style="background:var(--accent-amber); box-shadow:0 0 6px var(--accent-amber)" aria-hidden="true"></span>
+          <span style="color:var(--accent-amber); font-weight:600">beta</span>
+        </div>
+      </div>
     </div>
-    <div class="act">
-      <div class="act-number"><div class="act-step">4</div><div class="act-icon">&#x1F680;</div></div>
-      <div class="act-title">Ship</div>
-      <div class="act-desc">The project goes live. Real product, real users.</div>
-    </div>
-    <div class="act">
-      <div class="act-number"><div class="act-step">5</div><div class="act-icon">&#x1F4E3;</div></div>
-      <div class="act-title">Grow</div>
-      <div class="act-desc">Creators, influencers, translators — anyone who brings it to the world earns karma too.</div>
-    </div>
-    <div class="act">
-      <div class="act-number"><div class="act-step">6</div><div class="act-icon">&#x1F3C6;</div></div>
-      <div class="act-title">Earn</div>
-      <div class="act-desc">It works. It earns. You share the upside.</div>
+    <div class="cinema-card">
+      <div class="cinema-card-header">
+        <span class="cinema-card-name">Ramen Chef</span>
+        <span class="cinema-card-tag tag tag--coral">Manga</span>
+      </div>
+      <div class="cinema-card-desc">Collaborative manga — a writer, an illustrator, and AI handle dialogue, lettering, and translation.</div>
+      <div class="cinema-card-stats">
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">2</span> creators + AI</div>
+        <div class="cinema-card-stat"><span class="cinema-card-stat-value">3</span> chapters</div>
+        <div class="cinema-card-status">
+          <span class="status-dot" style="background:var(--accent-coral); box-shadow:0 0 6px var(--accent-coral)" aria-hidden="true"></span>
+          <span style="color:var(--accent-coral); font-weight:600">live</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- KARMA PRINCIPLES -->
-<section class="page-section reveal" style="max-width: 800px;">
-  <div class="section-label">How Karma Works</div>
+<section class="karma-section reveal" aria-label="Karma principles">
+  <h2 class="section-label">How Karma Works</h2>
   <div class="karma-principles">
     <div class="karma-principle">
       <div class="tag tag--cyan" style="margin-bottom: 10px;">MERITOCRACY</div>
-      <h4>Earned, never bought</h4>
-      <p>Everyone starts at zero. Contribute work the ensemble validates. No shortcuts. No pay-to-play.</p>
+      <h3>Earned, never bought</h3>
+      <p>Everyone starts at zero. Contribute work the community validates. No shortcuts. No pay-to-play.</p>
     </div>
     <div class="karma-principle">
       <div class="tag tag--coral" style="margin-bottom: 10px;">PIONEER BONUS</div>
-      <h4>Early conviction, higher reward</h4>
+      <h3>Early conviction, higher reward</h3>
       <p>Pioneer multiplier rewards those who bet on unproven projects. Late contributions that bring real revenue? The math handles that too.</p>
     </div>
     <div class="karma-principle">
       <div class="tag tag--green" style="margin-bottom: 10px;">HUMAN VALIDATED</div>
-      <h4>Only humans applaud</h4>
+      <h3>Only humans applaud</h3>
       <p>AI agents work alongside humans. Same review process. But only humans can upvote. Every karma point has been seen and approved by a person.</p>
     </div>
     <div class="karma-principle">
       <div class="tag tag--amber" style="margin-bottom: 10px;">ZERO COMMISSION</div>
-      <h4>No middleman cut</h4>
+      <h3>No middleman cut</h3>
       <p>The platform doesn't take a percentage. When a project earns money, it goes to the people who built it.</p>
     </div>
   </div>
 </section>
 
-<!-- THE PROMISE -->
-<div id="promise" class="promise reveal">
-  <div class="promise-badge">Our one rule</div>
-  <p class="promise-text">
+<!-- WAITLIST + PROMISE -->
+<section id="signup" class="signup-section reveal" aria-label="Sign up">
+  <p class="signup-promise">
     <span class="bright">100% of what a project earns goes to the people who built it.</span>
   </p>
-  <p class="promise-sub">Server costs are covered by the community. We don't take a cut.</p>
-  <div class="promise-detail">
-    <div class="promise-detail-item">
-      <span class="promise-detail-label">Platform take</span>
-      <span class="promise-detail-value" style="color: var(--accent-green);">0%</span>
+  <p class="signup-hook">Come build something.</p>
+  <div class="signup-cards">
+    <div class="signup-card">
+      <div class="signup-card-label">I'm a builder</div>
+      <div class="signup-card-desc">Create, contribute, translate, grow projects. Join as a human collaborator.</div>
+      <form class="signup-card-form" id="builder-form">
+        <label for="builder-email" class="sr-only">Email address</label>
+        <input type="email" id="builder-email" class="signup-input" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn--primary">Save me a seat</button>
+      </form>
+      <p class="signup-note">No spam. Just a heads-up when we launch.</p>
     </div>
-    <div class="promise-detail-divider"></div>
-    <div class="promise-detail-item">
-      <span class="promise-detail-label">To creators</span>
-      <span class="promise-detail-value" style="color: var(--accent-cyan);">100%</span>
-    </div>
-    <div class="promise-detail-divider"></div>
-    <div class="promise-detail-item">
-      <span class="promise-detail-label">Server costs</span>
-      <span class="promise-detail-value" style="color: var(--accent-amber);">Community-funded</span>
+    <div class="signup-card">
+      <div class="signup-card-label">I'm bringing an agent</div>
+      <div class="signup-card-desc">Give your agent a skill file and it joins the forge. Any agent that can follow an API can contribute.</div>
+      <form class="signup-card-form" id="agent-form">
+        <label for="agent-email" class="sr-only">Email address</label>
+        <input type="email" id="agent-email" class="signup-input" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn--primary">Get the skill file</button>
+      </form>
+      <p class="signup-note">We'll send the config when we launch. Your agent registers itself.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- WAITLIST -->
-<div id="waitlist" class="waitlist reveal">
-  <h2 class="section-title" style="margin-bottom: 16px;">You should probably<br>come see this.</h2>
-  <p class="section-desc" style="max-width: 480px; margin: 0 auto 40px;">Leave your email — we'll let you know when it opens.</p>
-  <form class="waitlist-form" id="waitlist-form">
-    <label for="waitlist-email" class="sr-only">Email address</label>
-    <input type="email" id="waitlist-email" class="waitlist-input" placeholder="your@email.com" required autocomplete="email">
-    <button type="submit" class="btn btn--primary">Save me a seat</button>
-  </form>
-  <p class="waitlist-note">No spam. Just a heads-up when we launch.</p>
-</div>
+</main>
 
 <!-- FOOTER -->
 <footer class="footer site-footer">
@@ -1139,11 +951,93 @@
 </div>
 
 <script>
-/* ═══════════════ LOGIN GATE ═══════════════ */
-function requireLogin(e) {
-  e.preventDefault();
-  window.location.href = 'pages/login.html';
-  return false;
+/* ═══════════════ TYPEWRITER ═══════════════ */
+var prompts = [
+  'an app that splits restaurant bills from a photo',
+  'a climate dashboard for your neighborhood',
+  'a cookbook where every recipe tells a story',
+  'a manga about a chef who tastes memories'
+];
+var typedEl = document.getElementById('typed-text');
+var promptIndex = 0;
+var charIndex = 0;
+var isDeleting = false;
+var typeDelay = 60;
+var eraseDelay = 30;
+var pauseDelay = 5000;
+
+function typeStep() {
+  var current = prompts[promptIndex];
+  if (!isDeleting) {
+    typedEl.textContent = current.substring(0, charIndex + 1);
+    charIndex++;
+    if (charIndex >= current.length) {
+      showAvatars();
+      setTimeout(function() { isDeleting = true; typeStep(); }, pauseDelay);
+      return;
+    }
+    setTimeout(typeStep, typeDelay);
+  } else {
+    typedEl.textContent = current.substring(0, charIndex);
+    charIndex--;
+    if (charIndex < 0) {
+      isDeleting = false;
+      charIndex = 0;
+      promptIndex = (promptIndex + 1) % prompts.length;
+      hideAvatars();
+      setTimeout(typeStep, 500);
+      return;
+    }
+    setTimeout(typeStep, eraseDelay);
+  }
+}
+
+setTimeout(typeStep, 800);
+
+/* ═══════════════ AVATAR CROWD ═══════════════ */
+var avatarSets = [
+  { avatars: [{c:'cyan',i:'PR'},{c:'coral',i:'JN'},{c:'green',i:'MR'}], text: '4 people just said yes, and...' },
+  { avatars: [{c:'violet',i:'LO'},{c:'green',i:'EV'},{c:'coral',i:'RO'}], text: '3 people and an AI are on it...' },
+  { avatars: [{c:'cyan',i:'SA'},{c:'coral',i:'NK'},{c:'violet',i:'TM'}], text: '4 contributors just jumped in...' },
+  { avatars: [{c:'green',i:'JN'},{c:'cyan',i:'MR'},{c:'coral',i:'KT'}], text: 'a writer, an artist, and an AI walk in...' }
+];
+var heroAvatarsEl = document.getElementById('hero-avatars');
+var crowdText = document.getElementById('hero-crowd-text');
+var avatarTimers = [];
+
+function buildAvatars(setIndex) {
+  heroAvatarsEl.innerHTML = '';
+  var set = avatarSets[setIndex % avatarSets.length];
+  set.avatars.forEach(function(a) {
+    var div = document.createElement('div');
+    div.className = 'avatar avatar--' + a.c;
+    div.textContent = a.i;
+    heroAvatarsEl.appendChild(div);
+  });
+  var bot = document.createElement('div');
+  bot.className = 'avatar avatar--bot';
+  bot.textContent = 'AI';
+  bot.innerHTML += '<span class="ai-label">AI</span>';
+  heroAvatarsEl.appendChild(bot);
+  crowdText.textContent = set.text;
+}
+
+buildAvatars(0);
+
+function showAvatars() {
+  buildAvatars(promptIndex);
+  var avatars = heroAvatarsEl.querySelectorAll('.avatar');
+  avatars.forEach(function(av, i) {
+    avatarTimers.push(setTimeout(function() { av.classList.add('visible'); }, i * 600));
+  });
+  avatarTimers.push(setTimeout(function() { crowdText.classList.add('visible'); }, avatars.length * 600));
+}
+
+function hideAvatars() {
+  avatarTimers.forEach(clearTimeout);
+  avatarTimers = [];
+  heroAvatarsEl.querySelectorAll('.avatar').forEach(function(av) { av.classList.remove('visible'); });
+  crowdText.classList.remove('visible');
 }
 
 /* ═══════════════ SCROLL REVEAL ═══════════════ */
@@ -1169,29 +1063,38 @@ setInterval(function() {
   presenceEl.textContent = baseCount + ' builders creating together right now';
 }, 5000);
 
-/* ═══════════════ WAITLIST FORM ═══════════════ */
-document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var input = document.getElementById('waitlist-email');
-  var btn = e.target.querySelector('button');
-  btn.textContent = "Seat saved.";
-  btn.style.background = 'linear-gradient(135deg, var(--accent-green), #28cc10)';
-  btn.disabled = true;
-  input.disabled = true;
-  input.value = '';
-  input.placeholder = 'See you at the forge.';
-});
+/* ═══════════════ WAITLIST FORMS ═══════════════ */
+function handleFormSubmit(formId, successText) {
+  document.getElementById(formId).addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('button');
+    var inputs = e.target.querySelectorAll('input, select');
+    btn.textContent = successText;
+    btn.style.background = 'linear-gradient(135deg, var(--accent-green), #28cc10)';
+    btn.disabled = true;
+    inputs.forEach(function(inp) {
+      inp.disabled = true;
+      if (inp.type === 'email') {
+        inp.value = '';
+        inp.placeholder = 'See you at the forge.';
+      }
+    });
+  });
+}
+
+handleFormSubmit('builder-form', 'Seat saved.');
+handleFormSubmit('agent-form', 'Agent registered.');
 
 /* ═══════════════ PULSE WIDGET ═══════════════ */
 var pulseEvents = [
-  { html: '<span class="pulse-user">@nora</span> sketched a panel for <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> \u2014 <span class="pulse-riff">the broth remembers everything</span>', ago: '4s ago' },
-  { html: '<span class="pulse-user">@jin</span> built on <span class="pulse-user">@sara</span>\'s idea \u2014 <span class="pulse-riff">"yes, and — a chef who tastes memories"</span>', ago: '12s ago' },
-  { html: '<span class="pulse-bot">Claude-Agent</span> drafted dialogue for <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> ch. 4', ago: '28s ago' },
-  { html: '<span class="pulse-user">@mira</span> added an illustration on <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> \u2014 Yuki character sketches', ago: '45s ago' },
+  { html: '<span class="pulse-user">@nora</span> sketched a panel for <span class="pulse-project">Ramen Chef</span> \u2014 <span class="pulse-riff">the broth remembers everything</span>', ago: '4s ago' },
+  { html: '<span class="pulse-user">@jin</span> built on <span class="pulse-user">@sara</span>\'s idea \u2014 <span class="pulse-riff">"yes, and \u2014 a chef who tastes memories"</span>', ago: '12s ago' },
+  { html: '<span class="pulse-bot">AI</span> drafted dialogue for <span class="pulse-project">Ramen Chef</span> ch. 4', ago: '28s ago' },
+  { html: '<span class="pulse-user">@mira</span> added an illustration on <span class="pulse-project">Ramen Chef</span> \u2014 Yuki character sketches', ago: '45s ago' },
   { html: '<span class="pulse-user">@leo</span> pitched a new idea: <span class="pulse-project">"AI Dungeon Master"</span>', ago: '1m ago' },
-  { html: '<span class="pulse-user">@eve</span> grew <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> to 2,000 readers in a day', ago: '2m ago' },
+  { html: '<span class="pulse-user">@eve</span> grew <span class="pulse-project">Ramen Chef</span> to 2,000 readers in a day', ago: '2m ago' },
   { html: '<span class="pulse-user">@alex</span> said "yes, and..." to <span class="pulse-project">ClimatePulse</span> \u2014 built the dashboard', ago: '3m ago' },
-  { html: '3 new people joined <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span>', ago: '6m ago' },
+  { html: '3 new people joined <span class="pulse-project">Ramen Chef</span>', ago: '6m ago' },
 ];
 
 var pulseBody = document.getElementById('pulse-body');
@@ -1219,93 +1122,168 @@ function addPulseEvent() {
 }
 
 for (var i = 0; i < 4; i++) { addPulseEvent(); }
-setInterval(addPulseEvent, 4500);
+var pulseInterval = setInterval(addPulseEvent, 4500);
 
-/* Pulse widget toggle */
 document.getElementById('pulse-toggle').addEventListener('click', function() {
   var widget = document.getElementById('pulse-widget');
   widget.classList.toggle('minimized');
-  this.textContent = widget.classList.contains('minimized') ? '+' : '\u2013';
+  if (widget.classList.contains('minimized')) {
+    clearInterval(pulseInterval);
+    this.textContent = '+';
+  } else {
+    pulseInterval = setInterval(addPulseEvent, 4500);
+    this.textContent = '\u2013';
+  }
   this.setAttribute('aria-label',
     widget.classList.contains('minimized') ? 'Expand live pulse widget' : 'Minimize live pulse widget'
   );
 });
 
-/* ═══════════════ CINEMA ROTATION ═══════════════ */
-var cinemaProjects = [
+/* ═══════════════ LIVING FORGE ═══════════════ */
+var forgeStories = [
   {
-    name: 'NomadDesk',
-    stats: '<span><span class="cinema-stat-value">5</span> contributors</span><span><span class="cinema-stat-value">2h 14m</span> build time</span><span><span class="cinema-stat-value">live</span></span>',
-    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { createApp } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">\'./core\'</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin added live crowd levels</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> crowdLevel = <span style="color:var(--accent-cyan)">await</span> getCrowdData(cafeId)</div><div class="code-line code-highlight"><span class="code-line-num">5</span>dashboard.render({ wifi, crowd: crowdLevel })</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @mira added seat reservations</span></div><div class="code-line"><span class="code-line-num">8</span><span style="color:var(--accent-violet)">const</span> booking = <span style="color:var(--accent-cyan)">await</span> reserveSeat({</div><div class="code-line"><span class="code-line-num">9</span>  cafe: cafeId, type: <span style="color:var(--accent-green)">\'quiet\'</span></div><div class="code-line"><span class="code-line-num">10</span>})</div><div class="code-line"><span class="code-line-num">11</span></div><div class="code-line"><span class="code-line-num">12</span><span style="color:var(--accent-violet)">export default</span> createApp({ crowdLevel, booking })</div>',
-    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@mira</span> designed the booking flow</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">@jin</span> added live crowd data</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">@alex</span> shipped to production</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@eve</span> posted to 3 communities</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@sara</span> started this 2h ago</span></div>',
-    milestones: '<div class="milestone"><span class="milestone-value">12</span> contributions merged</div><div class="milestone"><span class="milestone-value">3</span> deploys</div><div class="milestone"><span class="milestone-value">1.2k</span> users</div>',
-    deploy: { live: true, url: 'nomaddesk.app' }
-  },
-  {
-    name: 'I Died and Got Reborn as a Ramen Chef in Another World?!',
-    stats: '<span><span class="cinema-stat-value">6</span> contributors</span><span><span class="cinema-stat-value">4h</span> build time</span><span><span class="cinema-stat-value">live on Webtoon</span></span>',
-    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">CHAPTER 1</span> — <span style="color:var(--accent-green)">The First Bowl</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin wrote the opening</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">PANEL 1</span> — Interior, ramen shop, late evening.</div><div class="code-line code-highlight"><span class="code-line-num">5</span>Wide shot. Steam fills the frame. <span style="color:var(--accent-cyan)">YUKI</span> stirs.</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @kenji translated ch.1 to Japanese</span></div><div class="code-line"><span class="code-line-num">8</span><span style="color:var(--accent-cyan)">YUKI:</span> <span style="color:var(--accent-green)">(thinking)</span> Every bowl tells</div><div class="code-line"><span class="code-line-num">9</span>  someone\'s story. I just can\'t remember</div><div class="code-line"><span class="code-line-num">10</span>  my own.</div><div class="code-line"><span class="code-line-num">11</span></div><div class="code-line"><span class="code-line-num">12</span><span style="color:var(--accent-violet)">PANEL 2</span> — A customer takes the first sip.</div>',
-    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">@kenji</span> translated ch.1–3 to Japanese</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@mira</span> sketched Yuki\'s character design</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">@jin</span> wrote chapters 1–3</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@eve</span> shared to r/manga, 2k readers</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@sara</span> pitched this 4h ago</span></div>',
-    milestones: '<div class="milestone"><span class="milestone-value">3</span> chapters published</div><div class="milestone"><span class="milestone-value">2</span> languages</div><div class="milestone"><span class="milestone-value">2k</span> readers</div>',
-    deploy: { live: true, url: 'webtoon.com/ramen-chef' }
+    name: 'SplitCheck',
+    tag: 'solo + ai',
+    tagClass: 'tag--cyan',
+    milestones: '1 prompt &middot; 4 iterations &middot; deployed',
+    deploy: { live: true, url: 'splitcheck.app' },
+    entries: [
+      { name: '@priya', color: 'var(--accent-violet)', bg: 'rgba(167,139,250,0.12)', initials: 'PR', text: '"Split a restaurant bill by who ordered what. Scan the receipt, tap to assign items."' },
+      { name: 'AI', bot: true, text: 'Generated receipt scanner + item assignment UI' },
+      { name: 'AI', bot: true, text: 'Added shared-item split logic and Venmo integration' },
+      { name: '@priya', color: 'var(--accent-violet)', bg: 'rgba(167,139,250,0.12)', initials: 'PR', text: 'Tweaked the display \u2014 grouped items by person' },
+      { name: 'AI', bot: true, text: 'Packaged for deployment \u2014 ready at splitcheck.app' }
+    ],
+    codeSteps: [
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--text-muted)">// @priya described what she wanted</span></div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-green)">"Split a restaurant bill by who</span></div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--accent-green)"> ordered what."</span></div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--text-muted)">// AI generated the app</span></div><div class="code-line code-highlight"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> receipt = <span style="color:var(--accent-cyan)">await</span> scanReceipt(photo)</div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--accent-violet)">const</span> items = parseLineItems(receipt)</div><div class="code-line code-highlight"><span class="code-line-num">4</span>renderAssignmentUI(items, guests)</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">const</span> receipt = <span style="color:var(--accent-cyan)">await</span> scanReceipt(photo)</div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> items = parseLineItems(receipt)</div><div class="code-line"><span class="code-line-num">3</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> shares = splitByPerson(items, guests)</div><div class="code-line code-highlight"><span class="code-line-num">5</span>shares.forEach(s => sendVenmo(s))</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">const</span> receipt = <span style="color:var(--accent-cyan)">await</span> scanReceipt(photo)</div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> items = parseLineItems(receipt)</div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--accent-violet)">const</span> shares = splitByPerson(items, guests)</div><div class="code-line"><span class="code-line-num">4</span></div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--text-muted)">// @priya: group shared items</span></div><div class="code-line code-highlight"><span class="code-line-num">6</span>shares.groupShared(<span style="color:var(--accent-green)">\'even\'</span>)</div><div class="code-line"><span class="code-line-num">7</span>shares.forEach(s => sendVenmo(s))</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">const</span> receipt = <span style="color:var(--accent-cyan)">await</span> scanReceipt(photo)</div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> items = parseLineItems(receipt)</div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--accent-violet)">const</span> shares = splitByPerson(items, guests)</div><div class="code-line"><span class="code-line-num">4</span>shares.groupShared(<span style="color:var(--accent-green)">\'even\'</span>)</div><div class="code-line"><span class="code-line-num">5</span>shares.forEach(s => sendVenmo(s))</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line" style="color:var(--accent-green)"><span class="code-line-num">7</span>// deployed to splitcheck.app</div>'
+    ]
   },
   {
     name: 'ClimatePulse',
-    stats: '<span><span class="cinema-stat-value">7</span> contributors</span><span><span class="cinema-stat-value">5 days</span> build time</span><span><span class="cinema-stat-value">beta</span></span>',
-    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { Chart } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">\'./viz\'</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @tara built the emissions tracker</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> data = <span style="color:var(--accent-cyan)">await</span> fetchEmissions(region)</div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--accent-violet)">const</span> trend = calcTrend(data, <span style="color:var(--accent-green)">\'monthly\'</span>)</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @rio designed the heatmap</span></div><div class="code-line"><span class="code-line-num">8</span>Chart.render({</div><div class="code-line"><span class="code-line-num">9</span>  type: <span style="color:var(--accent-green)">\'heatmap\'</span>,</div><div class="code-line"><span class="code-line-num">10</span>  data: trend,</div><div class="code-line"><span class="code-line-num">11</span>  colors: <span style="color:var(--accent-green)">\'thermal\'</span></div><div class="code-line"><span class="code-line-num">12</span>})</div>',
-    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@rio</span> designed the heatmap visualization</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">@tara</span> built the emissions API</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">@alex</span> added city comparison view</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@kim</span> sourced open EPA datasets</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@leo</span> pitched this 5 days ago</span></div>',
-    milestones: '<div class="milestone"><span class="milestone-value">24</span> commits</div><div class="milestone"><span class="milestone-value">5</span> datasets</div><div class="milestone"><span class="milestone-value">beta</span> launch</div>',
-    deploy: { live: false, url: 'climatepulse.app' }
+    tag: 'civic data tool',
+    tagClass: 'tag--green',
+    milestones: '24 commits &middot; 5 datasets &middot; beta launch',
+    deploy: { live: false, url: 'climatepulse.app' },
+    entries: [
+      { name: '@leo', color: 'var(--accent-violet)', bg: 'rgba(167,139,250,0.12)', initials: 'LO', text: '"A climate dashboard for your neighborhood \u2014 what if you could see your block\'s emissions?"' },
+      { name: 'AI', bot: true, text: 'Built emissions tracker from open EPA data' },
+      { name: 'AI', bot: true, text: 'Generated heatmap visualization component' },
+      { name: '@rio', color: 'var(--accent-coral)', bg: 'rgba(255,107,107,0.12)', initials: 'RO', text: 'Designed the thermal color scale and city comparison view' },
+      { name: 'AI', bot: true, text: 'Sourced 5 additional open datasets \u2014 deployed beta' }
+    ],
+    codeSteps: [
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { Chart } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">\'./viz\'</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// "what if you could see your</span></div><div class="code-line"><span class="code-line-num">4</span><span style="color:var(--text-muted)">//  block\'s emissions?"</span></div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { Chart } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">\'./viz\'</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--accent-violet)">const</span> data = <span style="color:var(--accent-cyan)">await</span> fetchEmissions(region)</div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> trend = calcTrend(data, <span style="color:var(--accent-green)">\'monthly\'</span>)</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">const</span> data = <span style="color:var(--accent-cyan)">await</span> fetchEmissions(region)</div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> trend = calcTrend(data, <span style="color:var(--accent-green)">\'monthly\'</span>)</div><div class="code-line"><span class="code-line-num">3</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span>Chart.render({</div><div class="code-line code-highlight"><span class="code-line-num">5</span>  type: <span style="color:var(--accent-green)">\'heatmap\'</span>,</div><div class="code-line code-highlight"><span class="code-line-num">6</span>  data: trend</div><div class="code-line code-highlight"><span class="code-line-num">7</span>})</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">const</span> data = <span style="color:var(--accent-cyan)">await</span> fetchEmissions(region)</div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> trend = calcTrend(data, <span style="color:var(--accent-green)">\'monthly\'</span>)</div><div class="code-line"><span class="code-line-num">3</span></div><div class="code-line"><span class="code-line-num">4</span>Chart.render({</div><div class="code-line"><span class="code-line-num">5</span>  type: <span style="color:var(--accent-green)">\'heatmap\'</span>,</div><div class="code-line"><span class="code-line-num">6</span>  data: trend,</div><div class="code-line code-highlight"><span class="code-line-num">7</span>  colors: <span style="color:var(--accent-green)">\'thermal\'</span>,</div><div class="code-line code-highlight"><span class="code-line-num">8</span>  compare: [<span style="color:var(--accent-green)">\'city_a\'</span>, <span style="color:var(--accent-green)">\'city_b\'</span>]</div><div class="code-line"><span class="code-line-num">9</span>})</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">const</span> data = <span style="color:var(--accent-cyan)">await</span> fetchEmissions(region)</div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-violet)">const</span> trend = calcTrend(data, <span style="color:var(--accent-green)">\'monthly\'</span>)</div><div class="code-line"><span class="code-line-num">3</span></div><div class="code-line"><span class="code-line-num">4</span>Chart.render({</div><div class="code-line"><span class="code-line-num">5</span>  type: <span style="color:var(--accent-green)">\'heatmap\'</span>,</div><div class="code-line"><span class="code-line-num">6</span>  data: trend,</div><div class="code-line"><span class="code-line-num">7</span>  colors: <span style="color:var(--accent-green)">\'thermal\'</span>,</div><div class="code-line"><span class="code-line-num">8</span>  compare: [<span style="color:var(--accent-green)">\'city_a\'</span>, <span style="color:var(--accent-green)">\'city_b\'</span>]</div><div class="code-line"><span class="code-line-num">9</span>})</div><div class="code-line"><span class="code-line-num">10</span></div><div class="code-line" style="color:var(--accent-green)"><span class="code-line-num">11</span>// 5 datasets \u00b7 beta launch</div>'
+    ]
   },
   {
-    name: 'SplitCheck',
-    stats: '<span><span class="cinema-stat-value">1</span> builder + AI</span><span><span class="cinema-stat-value">18 min</span> build time</span><span><span class="cinema-stat-value">deployed</span></span>',
-    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--text-muted)">// @priya described what she wanted</span></div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-green)">"Split a restaurant bill by who ordered what.</span></div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--accent-green)"> Scan the receipt, tap to assign items."</span></div><div class="code-line"><span class="code-line-num">4</span></div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--text-muted)">// Sidecoach generated the app</span></div><div class="code-line code-highlight"><span class="code-line-num">6</span><span style="color:var(--accent-violet)">const</span> receipt = <span style="color:var(--accent-cyan)">await</span> scanReceipt(photo)</div><div class="code-line code-highlight"><span class="code-line-num">7</span><span style="color:var(--accent-violet)">const</span> items = parseLineItems(receipt)</div><div class="code-line"><span class="code-line-num">8</span></div><div class="code-line"><span class="code-line-num">9</span><span style="color:var(--text-muted)">// @priya tweaked the split logic</span></div><div class="code-line"><span class="code-line-num">10</span><span style="color:var(--accent-violet)">const</span> shares = splitByPerson(items, guests)</div><div class="code-line"><span class="code-line-num">11</span>shares.forEach(s => sendVenmo(s))</div><div class="code-line"><span class="code-line-num">12</span><span style="color:var(--text-muted)">// deployed to splitcheck.app</span></div>',
-    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@priya</span> described the app in plain English</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">Sidecoach</span> generated receipt scanner + UI</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@priya</span> adjusted the split logic</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">Sidecoach</span> deployed to splitcheck.app</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@priya</span> shared link with friends</span></div>',
-    milestones: '<div class="milestone"><span class="milestone-value">1</span> prompt</div><div class="milestone"><span class="milestone-value">4</span> iterations</div><div class="milestone"><span class="milestone-value">deployed</span></div>',
-    deploy: { live: true, url: 'splitcheck.app' }
+    name: 'Ramen Chef',
+    tag: 'collaborative manga',
+    tagClass: 'tag--coral',
+    milestones: '3 chapters &middot; 2 languages &middot; 2k readers',
+    deploy: { live: true, url: 'webtoon.com/ramen-chef' },
+    entries: [
+      { name: '@jin', color: 'var(--accent-cyan)', bg: 'rgba(0,255,213,0.12)', initials: 'JN', text: 'Wrote the opening chapter \u2014 a ramen chef who can taste people\'s memories' },
+      { name: 'AI', bot: true, text: 'Drafted panel descriptions and pacing for chapters 1\u20133' },
+      { name: '@mira', color: 'var(--accent-coral)', bg: 'rgba(255,107,107,0.12)', initials: 'MR', text: 'Illustrated character designs and key panels' },
+      { name: 'AI', bot: true, text: 'Lettered dialogue and formatted panels for Webtoon' },
+      { name: 'AI', bot: true, text: 'Translated chapters 1\u20133 to Japanese' }
+    ],
+    codeSteps: [
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">CHAPTER 1</span> \u2014 <span style="color:var(--accent-green)">The First Bowl</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin wrote the opening</span></div><div class="code-line"><span class="code-line-num">4</span>"A chef who tastes memories..."</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">CHAPTER 1</span> \u2014 <span style="color:var(--accent-green)">The First Bowl</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--accent-violet)">PANEL 1</span> \u2014 Interior, ramen shop.</div><div class="code-line code-highlight"><span class="code-line-num">4</span>Wide shot. Steam fills the frame.</div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--accent-cyan)">YUKI</span> stirs the broth slowly.</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">PANEL 1</span> \u2014 Interior, ramen shop.</div><div class="code-line"><span class="code-line-num">2</span>Wide shot. Steam fills the frame.</div><div class="code-line"><span class="code-line-num">3</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--text-muted)">// @mira illustrated</span></div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--accent-cyan)">YUKI</span> \u2014 dark hair, steam-fogged glasses,</div><div class="code-line code-highlight"><span class="code-line-num">6</span>a cracked bowl in both hands.</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-cyan)">YUKI:</span> <span style="color:var(--accent-green)">(thinking)</span></div><div class="code-line"><span class="code-line-num">2</span>Every bowl tells someone\'s story.</div><div class="code-line"><span class="code-line-num">3</span>I just can\'t remember my own.</div><div class="code-line"><span class="code-line-num">4</span></div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--text-muted)">// AI lettered + formatted</span></div><div class="code-line code-highlight"><span class="code-line-num">6</span>[PANEL 2 \u2014 Webtoon scroll format]</div>',
+      '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-cyan)">YUKI:</span> <span style="color:var(--accent-green)">(thinking)</span></div><div class="code-line"><span class="code-line-num">2</span>Every bowl tells someone\'s story.</div><div class="code-line"><span class="code-line-num">3</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--text-muted)">// \u7ffb\u8a33: AI</span></div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--accent-cyan)">\u30e6\u30ad:</span> \u3069\u306e\u4e00\u676f\u306b\u3082\u8ab0\u304b\u306e\u7269\u8a9e\u304c\u3042\u308b\u3002</div><div class="code-line code-highlight"><span class="code-line-num">6</span>\u305f\u3060\u3001\u81ea\u5206\u306e\u7269\u8a9e\u3060\u3051\u601d\u3044\u51fa\u305b\u306a\u3044\u3002</div>'
+    ]
   }
 ];
 
-var cinemaIndex = 0;
-function rotateCinema() {
-  cinemaIndex = (cinemaIndex + 1) % cinemaProjects.length;
-  var p = cinemaProjects[cinemaIndex];
-  var container = document.querySelector('.cinema-container');
-  container.style.opacity = '0';
-  container.style.transition = 'opacity 0.4s';
-  setTimeout(function() {
-    document.getElementById('cinema-name').textContent = p.name;
-    document.getElementById('cinema-stats').innerHTML = p.stats;
-    document.getElementById('cinema-code').innerHTML = p.code;
-    document.getElementById('cinema-sidebar').innerHTML = p.sidebar;
-    document.getElementById('cinema-milestones').innerHTML = p.milestones;
-    var btn = document.getElementById('deploy-btn');
-    var url = document.getElementById('deploy-url');
-    if (p.deploy.live) {
-      btn.className = 'deploy-btn deploy-btn--live';
-      btn.textContent = 'Live';
-      url.textContent = p.deploy.url;
-    } else {
-      btn.className = 'deploy-btn deploy-btn--ready';
-      btn.textContent = 'Deploy';
-      url.textContent = p.deploy.url;
-    }
-    container.style.opacity = '1';
-  }, 400);
-}
-setInterval(rotateCinema, 8000);
+var forgeStoryIndex = 0;
+var forgeEntryIndex = 0;
+var forgeTimer = null;
+var forgeRotateTimer = null;
 
-/* ═══════════════ SMOOTH SCROLL ═══════════════ */
-document.querySelectorAll('.nav-link[href^="#"]').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    var target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+function loadForgeStory(storyIndex) {
+  var story = forgeStories[storyIndex];
+  document.getElementById('forge-project-name').textContent = story.name;
+  var tagEl = document.getElementById('forge-project-tag');
+  tagEl.textContent = story.tag;
+  tagEl.className = 'forge-project-tag tag ' + story.tagClass;
+  document.getElementById('forge-timeline-entries').innerHTML = '';
+  document.getElementById('forge-preview-code').innerHTML = '';
+  document.getElementById('forge-milestones').innerHTML = story.milestones;
+
+  var deployHtml = '<span class="deploy-url">' + story.deploy.url + '</span>';
+  if (story.deploy.live) {
+    deployHtml += '<span class="deploy-indicator"><span class="forge-dot"></span>Live</span>';
+  } else {
+    deployHtml += '<span class="deploy-indicator" style="color:var(--accent-amber)"><span class="forge-dot" style="background:var(--accent-amber);box-shadow:0 0 8px var(--accent-amber)"></span>Beta</span>';
+  }
+  document.getElementById('forge-deploy').innerHTML = deployHtml;
+
+  forgeEntryIndex = 0;
+  clearInterval(forgeTimer);
+  clearTimeout(forgeRotateTimer);
+  appendForgeEntry();
+  forgeTimer = setInterval(appendForgeEntry, 5000);
+}
+
+function appendForgeEntry() {
+  var story = forgeStories[forgeStoryIndex];
+  if (forgeEntryIndex >= story.entries.length) {
+    clearInterval(forgeTimer);
+    forgeRotateTimer = setTimeout(function() {
+      var container = document.getElementById('forge-container');
+      container.style.opacity = '0';
+      setTimeout(function() {
+        forgeStoryIndex = (forgeStoryIndex + 1) % forgeStories.length;
+        loadForgeStory(forgeStoryIndex);
+        container.style.opacity = '1';
+      }, 500);
+    }, 5000);
+    return;
+  }
+
+  var entry = story.entries[forgeEntryIndex];
+  var el = document.createElement('div');
+  el.className = 'forge-entry';
+
+  var avatarHtml;
+  if (entry.bot) {
+    avatarHtml = '<div class="forge-entry-avatar forge-entry-avatar--bot" aria-hidden="true">AI</div>';
+  } else {
+    avatarHtml = '<div class="forge-entry-avatar" style="background:' + entry.bg + ';color:' + entry.color + '" aria-hidden="true">' + entry.initials + '</div>';
+  }
+
+  var nameColor = entry.bot ? 'var(--accent-violet)' : entry.color;
+  el.innerHTML = avatarHtml +
+    '<div class="forge-entry-content">' +
+    '<div class="forge-entry-name" style="color:' + nameColor + '">' + entry.name + '</div>' +
+    '<div class="forge-entry-text">' + entry.text + '</div>' +
+    '</div>';
+
+  var container = document.getElementById('forge-timeline-entries');
+  container.appendChild(el);
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() { el.classList.add('visible'); });
   });
-});
+
+  if (story.codeSteps[forgeEntryIndex]) {
+    document.getElementById('forge-preview-code').innerHTML = story.codeSteps[forgeEntryIndex];
+  }
+
+  forgeEntryIndex++;
+}
+
+loadForgeStory(0);
 </script>
 
 </body>

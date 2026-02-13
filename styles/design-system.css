@@ -796,7 +796,7 @@ ul, ol { list-style: none; }
 .tier--builder .tier-dot { background: var(--accent-cyan); box-shadow: 0 0 6px rgba(0, 255, 213, 0.3); }
 .tier--architect .tier-dot { background: var(--accent-violet); box-shadow: 0 0 6px rgba(167, 139, 250, 0.3); }
 .tier--partner .tier-dot { background: var(--accent-amber); box-shadow: 0 0 8px rgba(245, 166, 35, 0.4); }
-.tier--founders-circle .tier-dot { background: var(--accent-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+.tier--inner-circle .tier-dot { background: var(--accent-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
 
 .tier-name {
   font-family: var(--font-mono);
