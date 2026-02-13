@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrowdForge — What happens when people say "yes, and..."</title>
+<meta name="description" content="Someone says 'what if...' and the rest say 'yes, and...' — apps, manga, recipes, tools built by people who just met. Come see what they're making.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/design-system.css">
+<style>
+  /* ═══════════════ HERO ═══════════════ */
+  .hero {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 40px 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .forge-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    animation: blink 2.5s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--accent-cyan);
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 .glow-text {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero h1 .dim { color: var(--text-muted); font-weight: 600; }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  .hero-sub strong { color: var(--text-primary); }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 64px;
+  }
+
+  .hero-presence {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-presence .forge-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* ═══════════════ YES-AND CHAIN ═══════════════ */
+  .chain-section {
+    position: relative;
+    z-index: 2;
+    padding: 80px 40px 120px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .chain-container {
+    position: relative;
+  }
+
+  .chain-thread {
+    position: absolute;
+    left: 23px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+      var(--accent-cyan),
+      var(--accent-green),
+      var(--accent-violet),
+      var(--accent-amber));
+    opacity: 0.2;
+  }
+
+  .chain-riff {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: chain-in 0.6s var(--ease-out) forwards;
+  }
+
+  .chain-riff:nth-child(2) { animation-delay: 0.3s; }
+  .chain-riff:nth-child(3) { animation-delay: 0.7s; }
+  .chain-riff:nth-child(4) { animation-delay: 1.1s; }
+  .chain-riff:nth-child(5) { animation-delay: 1.5s; }
+  .chain-riff:nth-child(6) { animation-delay: 1.9s; }
+
+  @keyframes chain-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chain-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .chain-body {
+    flex: 1;
+    padding: 20px 24px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .chain-body:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: translateX(4px);
+  }
+
+  .chain-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .chain-name { font-weight: 600; }
+  .chain-type {
+    font-size: 0.62rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.05em;
+  }
+
+  .chain-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .chain-text em {
+    color: var(--text-primary);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .chain-text code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--accent-cyan);
+  }
+
+  .chain-outcome {
+    margin-top: 16px;
+    padding: 20px 24px;
+    background: var(--bg-elevated);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    opacity: 0;
+    animation: chain-in 0.8s var(--ease-out) 2.4s forwards;
+  }
+
+  .chain-outcome-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent-gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .chain-outcome-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+
+  .chain-outcome-sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ═══════════════ SECTIONS ═══════════════ */
+  .page-section {
+    position: relative;
+    z-index: 2;
+    padding: 80px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-title .accent {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent-cyan);
+  }
+
+  /* ═══════════════ THE PROMISE ═══════════════ */
+  .promise {
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .promise-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .promise-text .bright {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .promise-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .promise-badge::before,
+  .promise-badge::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-green));
+  }
+
+  .promise-badge::after {
+    background: linear-gradient(90deg, var(--accent-green), transparent);
+  }
+
+  .promise-sub {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .promise-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    padding: 24px 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .promise-detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .promise-detail-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .promise-detail-value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.3rem;
+  }
+
+  .promise-detail-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border-subtle);
+  }
+
+  /* ═══════════════ RIFF SHOWCASE ═══════════════ */
+  .riff-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 48px;
+  }
+
+  .riff-showcase .riff-card:last-child {
+    grid-column: 2 / 3;
+  }
+
+  .riff-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: all 0.4s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .riff-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .riff-card:hover::before { opacity: 1; }
+  .riff-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .riff-card:nth-child(1)::before { background: var(--accent-violet); }
+  .riff-card:nth-child(2)::before { background: var(--accent-cyan); }
+  .riff-card:nth-child(3)::before { background: var(--accent-coral); }
+  .riff-card:nth-child(4)::before { background: var(--accent-green); }
+  .riff-card:nth-child(5)::before { background: var(--accent-amber); }
+
+  .riff-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .riff-card-type {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+  }
+
+  .riff-card-author {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .riff-card-content {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    min-height: 60px;
+  }
+
+  .riff-card-content strong { color: var(--text-primary); }
+
+  .riff-card-content code {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--accent-cyan);
+  }
+
+  .riff-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .riff-card-karma { color: var(--accent-gold); font-weight: 600; }
+
+  /* ═══════════════ KARMA PRINCIPLES ═══════════════ */
+  .karma-principles { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+
+  .karma-principle {
+    padding: 24px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    transition: all 0.3s var(--ease-out);
+    border-left: 3px solid transparent;
+  }
+
+  .karma-principle:hover {
+    border-left-color: var(--accent-cyan);
+    transform: translateX(4px);
+  }
+
+  .karma-principle h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .karma-principle p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* ═══════════════ CALLOUT ═══════════════ */
+  .callout {
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .callout-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    letter-spacing: -0.02em;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  .callout-text .dim { color: var(--text-muted); }
+  .callout-text .bright {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ═══════════════ WAITLIST ═══════════════ */
+  .waitlist {
+    text-align: center;
+    padding: 80px 40px 120px;
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .waitlist-input {
+    flex: 1;
+    padding: 16px 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    outline: none;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .waitlist-input::placeholder { color: var(--text-muted); }
+  .waitlist-input:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 24px rgba(0, 255, 213, 0.1);
+  }
+
+  .waitlist-note {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ═══════════════ FORGE STREAM CINEMA ═══════════════ */
+  .cinema-container {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-active);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 60px rgba(0, 255, 213, 0.05);
+  }
+
+  .cinema-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 28px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .cinema-project { display: flex; align-items: center; gap: 12px; }
+
+  .cinema-project-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .cinema-stats {
+    display: flex;
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+
+  .cinema-stat-value { color: var(--accent-cyan); font-weight: 600; }
+
+  .cinema-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    min-height: 340px;
+  }
+
+  .cinema-code {
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 2;
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .code-line { color: var(--text-secondary); }
+  .code-line-num {
+    color: var(--text-muted);
+    user-select: none;
+    display: inline-block;
+    width: 28px;
+    text-align: right;
+    margin-right: 16px;
+  }
+
+  .code-highlight {
+    background: rgba(0, 255, 213, 0.03);
+    border-left: 2px solid var(--accent-cyan);
+    margin: 0 -24px;
+    padding: 0 22px;
+  }
+
+  .cinema-sidebar {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-elevated);
+    border-radius: 8px;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    animation: sidebar-in 0.4s var(--ease-out);
+  }
+
+  @keyframes sidebar-in {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .sidebar-event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .cinema-milestones {
+    padding: 14px 28px;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .milestone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+  }
+
+  .milestone-value {
+    color: var(--accent-cyan);
+    font-weight: 600;
+  }
+
+  .cinema-deploy {
+    padding: 14px 28px;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .deploy-btn {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .deploy-btn--ready {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    color: var(--bg-deep);
+  }
+
+  .deploy-btn--live {
+    background: transparent;
+    border: 1px solid var(--accent-green);
+    color: var(--accent-green);
+  }
+
+  .deploy-btn--live::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--accent-green);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  .deploy-url {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  /* ═══════════════ PULSE WIDGET ═══════════════ */
+  .pulse-event-text {
+    flex: 1;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .pulse-event-text .pulse-user { color: var(--accent-cyan); font-weight: 500; }
+  .pulse-event-text .pulse-project { color: var(--accent-green); font-weight: 500; }
+  .pulse-event-text .pulse-bot { color: var(--accent-violet); font-weight: 500; }
+  .pulse-event-text .pulse-riff { color: var(--accent-coral); font-weight: 500; }
+
+  .pulse-event-time {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .pulse-minimize {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.3s;
+  }
+
+  .pulse-minimize:hover { color: var(--text-primary); }
+  .pulse-widget.minimized .pulse-body { display: none; }
+  .pulse-widget.minimized { max-height: none; }
+
+  /* ═══════════════ HOW IT WORKS — STEPS ═══════════════ */
+  .acts {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    position: relative;
+    margin-top: 48px;
+  }
+
+  .acts::before {
+    content: '';
+    position: absolute;
+    top: 44px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-amber), var(--accent-coral), var(--accent-violet), var(--accent-cyan), var(--accent-gold));
+    opacity: 0.25;
+  }
+
+  .act {
+    text-align: center;
+    position: relative;
+    padding: 0 14px;
+  }
+
+  .act-number {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 2;
+  }
+
+  .act-step {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 2px;
+  }
+
+  .act-icon { font-size: 1.6rem; }
+
+  .act:nth-child(1) .act-number { border-color: rgba(245, 166, 35, 0.3); color: var(--accent-amber); }
+  .act:nth-child(2) .act-number { border-color: rgba(255, 107, 107, 0.3); color: var(--accent-coral); }
+  .act:nth-child(3) .act-number { border-color: rgba(167, 139, 250, 0.3); color: var(--accent-violet); }
+  .act:nth-child(4) .act-number { border-color: rgba(0, 255, 213, 0.3); color: var(--accent-cyan); }
+  .act:nth-child(5) .act-number { border-color: rgba(57, 255, 20, 0.3); color: var(--accent-green); }
+  .act:nth-child(6) .act-number { border-color: rgba(255, 215, 0, 0.3); color: var(--accent-gold); }
+
+  .act:hover .act-number {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(245, 166, 35, 0.15);
+  }
+
+  .act-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .act-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* ═══════════════ FOOTER OVERRIDE ═══════════════ */
+  .site-footer {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ═══════════════ RESPONSIVE ═══════════════ */
+  @media (max-width: 1024px) {
+    .cinema-body { grid-template-columns: 1fr; }
+    .cinema-sidebar { display: none; }
+    .acts { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .acts::before { display: none; }
+    .page-section { padding-left: 24px; padding-right: 24px; }
+    .hero { padding-left: 24px; padding-right: 24px; }
+    .chain-section { padding-left: 24px; padding-right: 24px; }
+    .promise { padding-left: 24px; padding-right: 24px; }
+    .promise-detail { flex-direction: column; gap: 16px; }
+    .promise-detail-divider { width: 60px; height: 1px; }
+  }
+
+  @media (max-width: 640px) {
+    .cinema-wrap { padding: 0 16px 40px; }
+    .cinema-milestones { flex-wrap: wrap; gap: 10px; }
+    .cinema-code { font-size: 0.62rem; padding: 16px; }
+    .hero { padding-left: 16px; padding-right: 16px; }
+    .page-section { padding-left: 16px; padding-right: 16px; }
+    .chain-section { padding-left: 16px; padding-right: 16px; }
+    .acts { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .waitlist-form { flex-direction: column; }
+    .hero-cta { flex-direction: column; }
+    .promise { padding: 60px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ATMOSPHERE -->
+<div class="atmosphere" aria-hidden="true">
+  <div class="atmosphere-grid"></div>
+  <div class="atmosphere-glow atmosphere-glow--cyan"></div>
+  <div class="atmosphere-glow atmosphere-glow--green"></div>
+  <div class="atmosphere-grain"></div>
+  <div class="atmosphere-scanlines"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="CrowdForge home">
+    <div class="nav-logo-mark" aria-hidden="true">&#x2692;</div>
+    CrowdForge
+  </a>
+  <div class="nav-links">
+    <a href="pages/home.html" class="nav-link">Home</a>
+    <a href="pages/stream.html" class="nav-link" onclick="return requireLogin(event)">Discover</a>
+    <a href="pages/forge.html" class="nav-link" onclick="return requireLogin(event)">Forge</a>
+    <a href="pages/dashboard.html" class="nav-link" onclick="return requireLogin(event)">Dashboard</a>
+    <a href="pages/leaderboards.html" class="nav-link" onclick="return requireLogin(event)">Leaderboards</a>
+    <button class="btn btn--primary btn--sm" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the Waitlist</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero page-content">
+  <h1>
+    <span class="glow-text">What are you making?</span>
+  </h1>
+  <div class="hero-cta">
+    <button class="btn btn--primary btn--lg" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the waitlist</button>
+    <button class="btn btn--secondary" onclick="document.querySelector('.cinema-wrap').scrollIntoView({behavior:'smooth'})">See what's happening &#8595;</button>
+  </div>
+  <div class="hero-presence">
+    <span class="forge-dot" aria-hidden="true"></span>
+    <span id="presence-count">247 builders creating together right now</span>
+  </div>
+  <div class="hero-label" style="margin-top: 16px; margin-bottom: 0;">
+    <span class="forge-dot" aria-hidden="true"></span>
+    Live on the forge
+  </div>
+</div>
+
+<!-- CINEMA -->
+<section class="cinema-wrap" style="position:relative;z-index:2;padding:0 40px 60px;max-width:1100px;margin:0 auto;">
+  <div class="cinema-container">
+    <div class="cinema-header">
+      <div class="cinema-project">
+        <span class="forge-dot" aria-hidden="true"></span>
+        <span class="cinema-project-name" id="cinema-name">NomadDesk</span>
+      </div>
+      <div class="cinema-stats" id="cinema-stats">
+        <span><span class="cinema-stat-value">5</span> contributors</span>
+        <span><span class="cinema-stat-value">2h 14m</span> build time</span>
+        <span><span class="cinema-stat-value">live</span></span>
+      </div>
+    </div>
+    <div class="cinema-body">
+      <div class="cinema-code" id="cinema-code">
+        <div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { createApp } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">'./core'</span></div>
+        <div class="code-line"><span class="code-line-num">2</span></div>
+        <div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin added live crowd levels</span></div>
+        <div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> crowdLevel = <span style="color:var(--accent-cyan)">await</span> getCrowdData(cafeId)</div>
+        <div class="code-line code-highlight"><span class="code-line-num">5</span>dashboard.render({ wifi, crowd: crowdLevel })</div>
+        <div class="code-line"><span class="code-line-num">6</span></div>
+        <div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @mira added seat reservations</span></div>
+        <div class="code-line"><span class="code-line-num">8</span><span style="color:var(--accent-violet)">const</span> booking = <span style="color:var(--accent-cyan)">await</span> reserveSeat({</div>
+        <div class="code-line"><span class="code-line-num">9</span>  cafe: cafeId, type: <span style="color:var(--accent-green)">'quiet'</span></div>
+        <div class="code-line"><span class="code-line-num">10</span>})</div>
+        <div class="code-line"><span class="code-line-num">11</span></div>
+        <div class="code-line"><span class="code-line-num">12</span><span style="color:var(--accent-violet)">export default</span> createApp({ crowdLevel, booking })</div>
+      </div>
+      <div class="cinema-sidebar" id="cinema-sidebar">
+        <div class="sidebar-label">Activity</div>
+        <div class="sidebar-event">
+          <div class="sidebar-event-dot" style="background:var(--accent-coral)"></div>
+          <span><span style="color:var(--accent-coral);font-weight:500">@mira</span> designed the booking flow</span>
+        </div>
+        <div class="sidebar-event">
+          <div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div>
+          <span><span style="color:var(--accent-cyan);font-weight:500">@jin</span> added live crowd data</span>
+        </div>
+        <div class="sidebar-event">
+          <div class="sidebar-event-dot" style="background:var(--accent-green)"></div>
+          <span><span style="color:var(--accent-green);font-weight:500">@alex</span> shipped to production</span>
+        </div>
+        <div class="sidebar-event">
+          <div class="sidebar-event-dot" style="background:var(--accent-amber)"></div>
+          <span><span style="color:var(--accent-amber);font-weight:500">@eve</span> posted to 3 communities</span>
+        </div>
+        <div class="sidebar-event">
+          <div class="sidebar-event-dot" style="background:var(--accent-violet)"></div>
+          <span><span style="color:var(--accent-violet);font-weight:500">@sara</span> started this 2h ago</span>
+        </div>
+      </div>
+    </div>
+    <div class="cinema-milestones" id="cinema-milestones">
+      <div class="milestone"><span class="milestone-value">12</span> contributions merged</div>
+      <div class="milestone"><span class="milestone-value">3</span> deploys</div>
+      <div class="milestone"><span class="milestone-value">1.2k</span> users</div>
+    </div>
+    <div class="cinema-deploy" id="cinema-deploy">
+      <span class="deploy-url" id="deploy-url">nomaddesk.app</span>
+      <button class="deploy-btn deploy-btn--live" id="deploy-btn">Live</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="page-section reveal">
+  <div class="section-label">How It Works</div>
+  <div class="acts">
+    <div class="act">
+      <div class="act-number"><div class="act-step">1</div><div class="act-icon">&#x1F4AC;</div></div>
+      <div class="act-title">Pitch</div>
+      <div class="act-desc">Throw out an idea. A half-thought is enough.</div>
+    </div>
+    <div class="act">
+      <div class="act-number"><div class="act-step">2</div><div class="act-icon">&#x1F91D;</div></div>
+      <div class="act-title">Rally</div>
+      <div class="act-desc">People show up to help. A team forms around your idea.</div>
+    </div>
+    <div class="act">
+      <div class="act-number"><div class="act-step">3</div><div class="act-icon">&#x1F528;</div></div>
+      <div class="act-title">Build</div>
+      <div class="act-desc">With AI, with friends, with experts you just met. Build it together. Deploy it for real.</div>
+    </div>
+    <div class="act">
+      <div class="act-number"><div class="act-step">4</div><div class="act-icon">&#x1F680;</div></div>
+      <div class="act-title">Ship</div>
+      <div class="act-desc">The project goes live. Real product, real users.</div>
+    </div>
+    <div class="act">
+      <div class="act-number"><div class="act-step">5</div><div class="act-icon">&#x1F4E3;</div></div>
+      <div class="act-title">Grow</div>
+      <div class="act-desc">Creators, influencers, translators — anyone who brings it to the world earns karma too.</div>
+    </div>
+    <div class="act">
+      <div class="act-number"><div class="act-step">6</div><div class="act-icon">&#x1F3C6;</div></div>
+      <div class="act-title">Earn</div>
+      <div class="act-desc">It works. It earns. You share the upside.</div>
+    </div>
+  </div>
+</section>
+
+<!-- KARMA PRINCIPLES -->
+<section class="page-section reveal" style="max-width: 800px;">
+  <div class="section-label">How Karma Works</div>
+  <div class="karma-principles">
+    <div class="karma-principle">
+      <div class="tag tag--cyan" style="margin-bottom: 10px;">MERITOCRACY</div>
+      <h4>Earned, never bought</h4>
+      <p>Everyone starts at zero. Contribute work the ensemble validates. No shortcuts. No pay-to-play.</p>
+    </div>
+    <div class="karma-principle">
+      <div class="tag tag--coral" style="margin-bottom: 10px;">PIONEER BONUS</div>
+      <h4>Early conviction, higher reward</h4>
+      <p>Pioneer multiplier rewards those who bet on unproven projects. Late contributions that bring real revenue? The math handles that too.</p>
+    </div>
+    <div class="karma-principle">
+      <div class="tag tag--green" style="margin-bottom: 10px;">HUMAN VALIDATED</div>
+      <h4>Only humans applaud</h4>
+      <p>AI agents work alongside humans. Same review process. But only humans can upvote. Every karma point has been seen and approved by a person.</p>
+    </div>
+    <div class="karma-principle">
+      <div class="tag tag--amber" style="margin-bottom: 10px;">ZERO COMMISSION</div>
+      <h4>No middleman cut</h4>
+      <p>The platform doesn't take a percentage. When a project earns money, it goes to the people who built it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROMISE -->
+<div id="promise" class="promise reveal">
+  <div class="promise-badge">Our one rule</div>
+  <p class="promise-text">
+    <span class="bright">100% of what a project earns goes to the people who built it.</span>
+  </p>
+  <p class="promise-sub">Server costs are covered by the community. We don't take a cut.</p>
+  <div class="promise-detail">
+    <div class="promise-detail-item">
+      <span class="promise-detail-label">Platform take</span>
+      <span class="promise-detail-value" style="color: var(--accent-green);">0%</span>
+    </div>
+    <div class="promise-detail-divider"></div>
+    <div class="promise-detail-item">
+      <span class="promise-detail-label">To creators</span>
+      <span class="promise-detail-value" style="color: var(--accent-cyan);">100%</span>
+    </div>
+    <div class="promise-detail-divider"></div>
+    <div class="promise-detail-item">
+      <span class="promise-detail-label">Server costs</span>
+      <span class="promise-detail-value" style="color: var(--accent-amber);">Community-funded</span>
+    </div>
+  </div>
+</div>
+
+<!-- WAITLIST -->
+<div id="waitlist" class="waitlist reveal">
+  <h2 class="section-title" style="margin-bottom: 16px;">You should probably<br>come see this.</h2>
+  <p class="section-desc" style="max-width: 480px; margin: 0 auto 40px;">Leave your email — we'll let you know when it opens.</p>
+  <form class="waitlist-form" id="waitlist-form">
+    <label for="waitlist-email" class="sr-only">Email address</label>
+    <input type="email" id="waitlist-email" class="waitlist-input" placeholder="your@email.com" required autocomplete="email">
+    <button type="submit" class="btn btn--primary">Save me a seat</button>
+  </form>
+  <p class="waitlist-note">No spam. Just a heads-up when we launch.</p>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer site-footer">
+  <div class="footer-inner container">
+    <div class="footer-copy">&copy; 2026 CrowdForge. 100% to creators.</div>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Discord</a>
+      <a href="#">Docs</a>
+    </div>
+  </div>
+</footer>
+
+<!-- LIVE PULSE WIDGET -->
+<div class="pulse-widget" id="pulse-widget" role="complementary" aria-label="Live forge activity">
+  <div class="pulse-header">
+    <div class="pulse-title">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      Live Pulse
+    </div>
+    <button class="pulse-minimize" id="pulse-toggle" aria-label="Minimize live pulse widget">&ndash;</button>
+  </div>
+  <div class="pulse-body" id="pulse-body" aria-live="polite"></div>
+</div>
+
+<script>
+/* ═══════════════ LOGIN GATE ═══════════════ */
+function requireLogin(e) {
+  e.preventDefault();
+  window.location.href = 'pages/login.html';
+  return false;
+}
+
+/* ═══════════════ SCROLL REVEAL ═══════════════ */
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(function(el) {
+  revealObserver.observe(el);
+});
+
+/* ═══════════════ PRESENCE COUNTER ═══════════════ */
+var presenceEl = document.getElementById('presence-count');
+var baseCount = 247;
+setInterval(function() {
+  baseCount += Math.floor(Math.random() * 3) - 1;
+  if (baseCount < 200) baseCount = 200;
+  if (baseCount > 300) baseCount = 300;
+  presenceEl.textContent = baseCount + ' builders creating together right now';
+}, 5000);
+
+/* ═══════════════ WAITLIST FORM ═══════════════ */
+document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var input = document.getElementById('waitlist-email');
+  var btn = e.target.querySelector('button');
+  btn.textContent = "Seat saved.";
+  btn.style.background = 'linear-gradient(135deg, var(--accent-green), #28cc10)';
+  btn.disabled = true;
+  input.disabled = true;
+  input.value = '';
+  input.placeholder = 'See you at the forge.';
+});
+
+/* ═══════════════ PULSE WIDGET ═══════════════ */
+var pulseEvents = [
+  { html: '<span class="pulse-user">@nora</span> sketched a panel for <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> \u2014 <span class="pulse-riff">the broth remembers everything</span>', ago: '4s ago' },
+  { html: '<span class="pulse-user">@jin</span> built on <span class="pulse-user">@sara</span>\'s idea \u2014 <span class="pulse-riff">"yes, and — a chef who tastes memories"</span>', ago: '12s ago' },
+  { html: '<span class="pulse-bot">Claude-Agent</span> drafted dialogue for <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> ch. 4', ago: '28s ago' },
+  { html: '<span class="pulse-user">@mira</span> added an illustration on <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> \u2014 Yuki character sketches', ago: '45s ago' },
+  { html: '<span class="pulse-user">@leo</span> pitched a new idea: <span class="pulse-project">"AI Dungeon Master"</span>', ago: '1m ago' },
+  { html: '<span class="pulse-user">@eve</span> grew <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span> to 2,000 readers in a day', ago: '2m ago' },
+  { html: '<span class="pulse-user">@alex</span> said "yes, and..." to <span class="pulse-project">ClimatePulse</span> \u2014 built the dashboard', ago: '3m ago' },
+  { html: '3 new people joined <span class="pulse-project">I Died and Got Reborn as a Ramen Chef in Another World?!</span>', ago: '6m ago' },
+];
+
+var pulseBody = document.getElementById('pulse-body');
+var pulseIndex = 0;
+var MAX_PULSE_EVENTS = 5;
+
+function renderPulseEvent(evt) {
+  var el = document.createElement('div');
+  el.className = 'pulse-event';
+  el.innerHTML =
+    '<div class="pulse-event-text">' + evt.html + '</div>' +
+    '<div class="pulse-event-time">' + evt.ago + '</div>';
+  return el;
+}
+
+function addPulseEvent() {
+  var evt = pulseEvents[pulseIndex % pulseEvents.length];
+  var el = renderPulseEvent(evt);
+  pulseBody.insertBefore(el, pulseBody.firstChild);
+  var events = pulseBody.querySelectorAll('.pulse-event');
+  if (events.length > MAX_PULSE_EVENTS) {
+    events[events.length - 1].remove();
+  }
+  pulseIndex++;
+}
+
+for (var i = 0; i < 4; i++) { addPulseEvent(); }
+setInterval(addPulseEvent, 4500);
+
+/* Pulse widget toggle */
+document.getElementById('pulse-toggle').addEventListener('click', function() {
+  var widget = document.getElementById('pulse-widget');
+  widget.classList.toggle('minimized');
+  this.textContent = widget.classList.contains('minimized') ? '+' : '\u2013';
+  this.setAttribute('aria-label',
+    widget.classList.contains('minimized') ? 'Expand live pulse widget' : 'Minimize live pulse widget'
+  );
+});
+
+/* ═══════════════ CINEMA ROTATION ═══════════════ */
+var cinemaProjects = [
+  {
+    name: 'NomadDesk',
+    stats: '<span><span class="cinema-stat-value">5</span> contributors</span><span><span class="cinema-stat-value">2h 14m</span> build time</span><span><span class="cinema-stat-value">live</span></span>',
+    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { createApp } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">\'./core\'</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin added live crowd levels</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> crowdLevel = <span style="color:var(--accent-cyan)">await</span> getCrowdData(cafeId)</div><div class="code-line code-highlight"><span class="code-line-num">5</span>dashboard.render({ wifi, crowd: crowdLevel })</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @mira added seat reservations</span></div><div class="code-line"><span class="code-line-num">8</span><span style="color:var(--accent-violet)">const</span> booking = <span style="color:var(--accent-cyan)">await</span> reserveSeat({</div><div class="code-line"><span class="code-line-num">9</span>  cafe: cafeId, type: <span style="color:var(--accent-green)">\'quiet\'</span></div><div class="code-line"><span class="code-line-num">10</span>})</div><div class="code-line"><span class="code-line-num">11</span></div><div class="code-line"><span class="code-line-num">12</span><span style="color:var(--accent-violet)">export default</span> createApp({ crowdLevel, booking })</div>',
+    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@mira</span> designed the booking flow</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">@jin</span> added live crowd data</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">@alex</span> shipped to production</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@eve</span> posted to 3 communities</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@sara</span> started this 2h ago</span></div>',
+    milestones: '<div class="milestone"><span class="milestone-value">12</span> contributions merged</div><div class="milestone"><span class="milestone-value">3</span> deploys</div><div class="milestone"><span class="milestone-value">1.2k</span> users</div>',
+    deploy: { live: true, url: 'nomaddesk.app' }
+  },
+  {
+    name: 'I Died and Got Reborn as a Ramen Chef in Another World?!',
+    stats: '<span><span class="cinema-stat-value">6</span> contributors</span><span><span class="cinema-stat-value">4h</span> build time</span><span><span class="cinema-stat-value">live on Webtoon</span></span>',
+    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">CHAPTER 1</span> — <span style="color:var(--accent-green)">The First Bowl</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @jin wrote the opening</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">PANEL 1</span> — Interior, ramen shop, late evening.</div><div class="code-line code-highlight"><span class="code-line-num">5</span>Wide shot. Steam fills the frame. <span style="color:var(--accent-cyan)">YUKI</span> stirs.</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @kenji translated ch.1 to Japanese</span></div><div class="code-line"><span class="code-line-num">8</span><span style="color:var(--accent-cyan)">YUKI:</span> <span style="color:var(--accent-green)">(thinking)</span> Every bowl tells</div><div class="code-line"><span class="code-line-num">9</span>  someone\'s story. I just can\'t remember</div><div class="code-line"><span class="code-line-num">10</span>  my own.</div><div class="code-line"><span class="code-line-num">11</span></div><div class="code-line"><span class="code-line-num">12</span><span style="color:var(--accent-violet)">PANEL 2</span> — A customer takes the first sip.</div>',
+    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">@kenji</span> translated ch.1–3 to Japanese</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@mira</span> sketched Yuki\'s character design</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">@jin</span> wrote chapters 1–3</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@eve</span> shared to r/manga, 2k readers</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@sara</span> pitched this 4h ago</span></div>',
+    milestones: '<div class="milestone"><span class="milestone-value">3</span> chapters published</div><div class="milestone"><span class="milestone-value">2</span> languages</div><div class="milestone"><span class="milestone-value">2k</span> readers</div>',
+    deploy: { live: true, url: 'webtoon.com/ramen-chef' }
+  },
+  {
+    name: 'ClimatePulse',
+    stats: '<span><span class="cinema-stat-value">7</span> contributors</span><span><span class="cinema-stat-value">5 days</span> build time</span><span><span class="cinema-stat-value">beta</span></span>',
+    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--accent-violet)">import</span> { Chart } <span style="color:var(--accent-violet)">from</span> <span style="color:var(--accent-green)">\'./viz\'</span></div><div class="code-line"><span class="code-line-num">2</span></div><div class="code-line code-highlight"><span class="code-line-num">3</span><span style="color:var(--text-muted)">// @tara built the emissions tracker</span></div><div class="code-line code-highlight"><span class="code-line-num">4</span><span style="color:var(--accent-violet)">const</span> data = <span style="color:var(--accent-cyan)">await</span> fetchEmissions(region)</div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--accent-violet)">const</span> trend = calcTrend(data, <span style="color:var(--accent-green)">\'monthly\'</span>)</div><div class="code-line"><span class="code-line-num">6</span></div><div class="code-line"><span class="code-line-num">7</span><span style="color:var(--text-muted)">// @rio designed the heatmap</span></div><div class="code-line"><span class="code-line-num">8</span>Chart.render({</div><div class="code-line"><span class="code-line-num">9</span>  type: <span style="color:var(--accent-green)">\'heatmap\'</span>,</div><div class="code-line"><span class="code-line-num">10</span>  data: trend,</div><div class="code-line"><span class="code-line-num">11</span>  colors: <span style="color:var(--accent-green)">\'thermal\'</span></div><div class="code-line"><span class="code-line-num">12</span>})</div>',
+    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@rio</span> designed the heatmap visualization</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">@tara</span> built the emissions API</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">@alex</span> added city comparison view</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@kim</span> sourced open EPA datasets</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@leo</span> pitched this 5 days ago</span></div>',
+    milestones: '<div class="milestone"><span class="milestone-value">24</span> commits</div><div class="milestone"><span class="milestone-value">5</span> datasets</div><div class="milestone"><span class="milestone-value">beta</span> launch</div>',
+    deploy: { live: false, url: 'climatepulse.app' }
+  },
+  {
+    name: 'SplitCheck',
+    stats: '<span><span class="cinema-stat-value">1</span> builder + AI</span><span><span class="cinema-stat-value">18 min</span> build time</span><span><span class="cinema-stat-value">deployed</span></span>',
+    code: '<div class="code-line"><span class="code-line-num">1</span><span style="color:var(--text-muted)">// @priya described what she wanted</span></div><div class="code-line"><span class="code-line-num">2</span><span style="color:var(--accent-green)">"Split a restaurant bill by who ordered what.</span></div><div class="code-line"><span class="code-line-num">3</span><span style="color:var(--accent-green)"> Scan the receipt, tap to assign items."</span></div><div class="code-line"><span class="code-line-num">4</span></div><div class="code-line code-highlight"><span class="code-line-num">5</span><span style="color:var(--text-muted)">// Sidecoach generated the app</span></div><div class="code-line code-highlight"><span class="code-line-num">6</span><span style="color:var(--accent-violet)">const</span> receipt = <span style="color:var(--accent-cyan)">await</span> scanReceipt(photo)</div><div class="code-line code-highlight"><span class="code-line-num">7</span><span style="color:var(--accent-violet)">const</span> items = parseLineItems(receipt)</div><div class="code-line"><span class="code-line-num">8</span></div><div class="code-line"><span class="code-line-num">9</span><span style="color:var(--text-muted)">// @priya tweaked the split logic</span></div><div class="code-line"><span class="code-line-num">10</span><span style="color:var(--accent-violet)">const</span> shares = splitByPerson(items, guests)</div><div class="code-line"><span class="code-line-num">11</span>shares.forEach(s => sendVenmo(s))</div><div class="code-line"><span class="code-line-num">12</span><span style="color:var(--text-muted)">// deployed to splitcheck.app</span></div>',
+    sidebar: '<div class="sidebar-label">Activity</div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-violet)"></div><span><span style="color:var(--accent-violet);font-weight:500">@priya</span> described the app in plain English</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-cyan)"></div><span><span style="color:var(--accent-cyan);font-weight:500">Sidecoach</span> generated receipt scanner + UI</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-coral)"></div><span><span style="color:var(--accent-coral);font-weight:500">@priya</span> adjusted the split logic</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-green)"></div><span><span style="color:var(--accent-green);font-weight:500">Sidecoach</span> deployed to splitcheck.app</span></div><div class="sidebar-event"><div class="sidebar-event-dot" style="background:var(--accent-amber)"></div><span><span style="color:var(--accent-amber);font-weight:500">@priya</span> shared link with friends</span></div>',
+    milestones: '<div class="milestone"><span class="milestone-value">1</span> prompt</div><div class="milestone"><span class="milestone-value">4</span> iterations</div><div class="milestone"><span class="milestone-value">deployed</span></div>',
+    deploy: { live: true, url: 'splitcheck.app' }
+  }
+];
+
+var cinemaIndex = 0;
+function rotateCinema() {
+  cinemaIndex = (cinemaIndex + 1) % cinemaProjects.length;
+  var p = cinemaProjects[cinemaIndex];
+  var container = document.querySelector('.cinema-container');
+  container.style.opacity = '0';
+  container.style.transition = 'opacity 0.4s';
+  setTimeout(function() {
+    document.getElementById('cinema-name').textContent = p.name;
+    document.getElementById('cinema-stats').innerHTML = p.stats;
+    document.getElementById('cinema-code').innerHTML = p.code;
+    document.getElementById('cinema-sidebar').innerHTML = p.sidebar;
+    document.getElementById('cinema-milestones').innerHTML = p.milestones;
+    var btn = document.getElementById('deploy-btn');
+    var url = document.getElementById('deploy-url');
+    if (p.deploy.live) {
+      btn.className = 'deploy-btn deploy-btn--live';
+      btn.textContent = 'Live';
+      url.textContent = p.deploy.url;
+    } else {
+      btn.className = 'deploy-btn deploy-btn--ready';
+      btn.textContent = 'Deploy';
+      url.textContent = p.deploy.url;
+    }
+    container.style.opacity = '1';
+  }, 400);
+}
+setInterval(rotateCinema, 8000);
+
+/* ═══════════════ SMOOTH SCROLL ═══════════════ */
+document.querySelectorAll('.nav-link[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
